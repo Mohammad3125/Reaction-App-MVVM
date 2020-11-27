@@ -1,0 +1,16 @@
+Index: app/src/main/java/com/example/bluetoothtest/view/fragments/FragmentUsersAdd.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/bluetoothtest/view/fragments/FragmentUsersAdd.java	(date 1606408221267)
++++ app/src/main/java/com/example/bluetoothtest/view/fragments/FragmentUsersAdd.java	(date 1606408221267)
+@@ -126,6 +126,8 @@
+ 
+ 
+         userViewModel.getUsers().observe(getViewLifecycleOwner(), users -> adapter.submitList(users));
++        //TODO
++        // WHEN WE GET ALL OF USERS FROM DATABASE WE DOESN'T SPECIFY WHICH PARENT'S USERS TO QUERY
+ 
+ 
+         button.setOnClickListener(buttonView -> {

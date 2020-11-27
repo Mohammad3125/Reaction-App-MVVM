@@ -1,0 +1,71 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorAccentC</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorAccentA</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowMinWidthMinor">50%</item>
+        <item name="android:windowMinWidthMajor">50%</item>
+
+
+        <!-- Enabling activity transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+        <!-- Defining type of exit and enter transition -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/shared_transition_image_text
+        </item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/shared_transition_image_text
+        </item>
+
+    </style>
+
+    <style name="LoginActivityStyle" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:statusBarColor">@color/colorAccentF</item>
+    </style>
+
+    <style name="PopupMenu" parent="@style/Widget.AppCompat.Light.PopupMenu">
+        <item name="android:itemBackground">@color/colorBackgroundDark</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="Buttons_Style">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textDirection">rtl</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/button_background</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="SettingFragmentStyle">
+        <item name="android:textColor">@color/colorAccentB</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="backgroundColor">@color/colorBackgroundDarker</item>
+    </style>
+
+    <style name="SplashScreenStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:statusBarColor">@color/colorAccentF</item>
+    </style>
+
+
+</resources>

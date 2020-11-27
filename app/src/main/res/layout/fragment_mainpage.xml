@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:Tools="http://schemas.android.com/tools"
+    Tools:context=".view.fragments.FragmentMainPage"
+    android:clipToPadding="false">
+
+    <RelativeLayout
+        android:id="@+id/layout_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:clipToPadding="false"
+        android:elevation="30dp">
+
+        <TextView
+            android:id="@+id/TextView_Filters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/raleway_bold_italic"
+            android:text="FILTERS"
+            android:textColor="@color/colorAccent"
+            android:textSize="19.5sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/layout_spinners"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TextView_Filters">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/spinner_total_players"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="5"
+                app:startIconDrawable="@drawable/ic_sport"
+                app:startIconTint="@color/colorAccentA"
+                android:hint="Sport"
+
+                android:textColorHint="@color/chip_text_color_selector"
+                app:boxBackgroundColor="@color/colorBackgroundDark"
+                app:boxStrokeColor="@color/chip_color_selector"
+                app:endIconTint="@color/chip_text_color_selector"
+                app:helperText="Sport Category"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/colorAccentB">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_textview_sports"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBackgroundDarker"
+                    android:inputType="none"
+                    android:textColor="@color/colorAccentB" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/spinner_sport"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="5"
+                android:hint="Players"
+                app:startIconDrawable="@drawable/ic_player"
+                app:startIconTint="@color/colorAccentA"
+                android:textColorHint="@color/chip_text_color_selector"
+                app:boxBackgroundColor="@color/colorBackgroundDark"
+                app:boxStrokeColor="@color/chip_color_selector"
+                app:endIconTint="@color/chip_text_color_selector"
+                app:helperText="Total Players"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/colorAccentB">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_textview_totalplayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/colorAccentB" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/Line_View"
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:layout_below="@id/layout_spinners"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/line_background"
+            android:elevation="20dp"
+            android:outlineProvider="background" />
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_temp"
+        android:padding="10dp">
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

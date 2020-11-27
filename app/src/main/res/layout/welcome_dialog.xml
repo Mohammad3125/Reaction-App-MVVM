@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="250dp"
+    android:background="@color/colorBackgroundDarker"
+    android:paddingTop="20dp"
+    android:layout_height="250dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/TextView_UserName"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/colorAccent"
+        android:textSize="32sp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/TextView_Welcome"
+        android:layout_below="@id/TextView_UserName"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:text="Welcome"
+        android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_below="@id/TextView_Welcome"
+            android:layout_centerHorizontal="true"
+            android:text="Enjoy!"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorAccentB"
+            android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Button_Ok_Dialog"
+        android:layout_alignParentBottom="true"
+        android:text="Okay"
+        android:fontFamily="@font/b_titr"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_dialog_background"/>
+
+
+</RelativeLayout>

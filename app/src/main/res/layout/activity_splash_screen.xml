@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".view.activities.SplashScreen">
+
+
+    <TextView
+        android:id="@+id/TextViewBlazePod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/shrink_hand"
+        android:outlineProvider="paddedBounds"
+        android:text="Blazepod"
+        android:textColor="@color/colorAccent"
+        android:textSize="50sp"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:id="@+id/TextViewMoreansStudio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:alpha="1"
+        android:fontFamily="@font/raleway_bold_italic"
+        android:text="Moreans Studio"
+        android:textColor="@color/colorAccentB"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/TextViewBlazePod" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:alpha="1"
+        android:fontFamily="@font/raleway_bold"
+        android:gravity="center"
+        android:text="From Facebook"
+        android:textColor="@color/colorAccentC"
+        android:textSize="24sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

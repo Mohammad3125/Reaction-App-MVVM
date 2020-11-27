@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fMainPage">
+    <fragment
+        android:id="@+id/fMainPage"
+        android:name="com.example.bluetoothtest.view.fragments.FragmentMainPage"
+        android:label="fragment_mainpage"
+        tools:layout="@layout/fragment_mainpage" />
+    <fragment
+        android:id="@+id/fUserAdd"
+        android:name="com.example.bluetoothtest.view.fragments.FragmentUsersAdd"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_fragmentUsersAdd2_to_fragmentUserInformation"
+            app:destination="@id/fUserInformation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fUserInformation"
+        android:name="com.example.bluetoothtest.view.fragments.FragmentUserInformation"
+        android:label="fragment_user_information"
+        tools:layout="@layout/fragment_user_information" >
+        <argument
+            android:name="personName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fUserInformation_to_fragmentEditProfile"
+            app:destination="@id/fEditProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="false"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fBluetoothScanner"
+        android:name="com.example.bluetoothtest.view.fragments.FragmentBluetoothScanner"
+        android:label="FragmentBluetoothScanner" />
+    <fragment
+        android:id="@+id/fSettingPreferences"
+        android:name="com.example.bluetoothtest.view.fragments.FragmentSettingPreferences"
+        android:label="FragmentSettingPreferences" />
+    <fragment
+        android:id="@+id/fEditProfile"
+        android:name="com.example.bluetoothtest.view.fragments.FragmentEditProfile"
+        android:label="FragmentEditProfile" >
+        <argument
+            android:name="personName"
+            app:argType="string" />
+    </fragment>
+</navigation>

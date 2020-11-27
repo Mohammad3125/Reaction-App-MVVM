@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="Language">
+        <DropDownPreference
+            android:entries="@array/languages"
+            android:entryValues="@array/languages"
+            android:title="Languages"
+            app:useSimpleSummaryProvider="true" />
+
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Connectivity">
+        <SwitchPreference
+            android:summary="Enables fast bluetooth search"
+            android:title="Fast Search" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="About">
+        <Preference
+            android:key="app-version"
+            android:summary="0.5.2"
+            android:title="Version" />
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Account">
+        <Preference
+            android:key="sign-out-button"
+            android:summary="Sign out of account"
+            android:title="Sign Out" />
+    </PreferenceCategory>
+</PreferenceScreen>

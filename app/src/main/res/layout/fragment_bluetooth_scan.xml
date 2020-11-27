@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundDarker"
+    android:clipToPadding="false"
+    android:padding="20dp">
+
+    <ScrollView
+        android:id="@+id/Layout_Scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarSize="8.5dp">
+
+        <TextView
+            android:id="@+id/TextView_Connected_Device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:text="Connected Devices"
+            android:textColor="@color/colorAccent"
+            android:textSize="19.5sp"
+            android:textStyle="normal"
+            android:translationY="800dp" />
+
+        <ListView
+            android:id="@+id/Added_Devices_ListView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/TextView_Connected_Device"
+            android:background="@drawable/background_layout"
+            android:divider="@color/colorAccentB"
+            android:dividerHeight="3dp"
+            android:elevation="20dp"
+            android:outlineProvider="background"
+            android:padding="10dp"
+            android:translationY="800dp" />
+
+
+        <Button
+            android:id="@+id/Button_Scan"
+            style="@style/Buttons_Style"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@id/Added_Devices_ListView"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_background"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:outlineProvider="background"
+            android:stateListAnimator="@null"
+            android:text="Scan"
+            android:textAlignment="center"
+            android:textColor="@color/colorBackgroundDark"
+            android:translationY="800dp" />
+
+        <TextView
+            android:id="@+id/TextViewAddedDevice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Added_Devices_ListView"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:divider="@color/colorAccentB"
+            android:dividerHeight="3dp"
+            android:text="Scanned Device"
+            android:textColor="@color/colorAccent"
+            android:textSize="19.5sp"
+            android:textStyle="normal"
+            android:translationY="800dp" />
+
+
+        <ListView
+            android:id="@+id/Found_Devices_ListView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@id/Button_Scan"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_layout"
+            android:divider="@color/colorBackgroundDark"
+            android:dividerHeight="10dp"
+            android:elevation="20dp"
+            android:outlineProvider="background"
+            android:padding="10dp"
+            android:translationY="800dp" />
+    </ScrollView>
+</RelativeLayout>

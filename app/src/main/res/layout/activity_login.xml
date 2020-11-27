@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/ic_dragon_scales"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true"
+    tools:context=".view.activities.LoginActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:clipToPadding="false"
+        android:padding="10dp">
+        <!-- We Can Ser Direction In Layout For Multiple Language Support -->
+        <RelativeLayout
+            android:id="@+id/MainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clipToPadding="false">
+
+
+            <TextView
+                android:id="@+id/textview_appname_loginpage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="25dp"
+                android:fontFamily="@font/shrink_hand"
+                android:gravity="center"
+                android:text="BlazePod"
+                android:textColor="@color/colorAccentA"
+                android:textSize="24sp" />
+
+
+            <!-- For Edit Text -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/MainLayout_EditText_Name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview_appname_loginpage"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:elevation="15dp"
+                android:hint="USERNAME"
+                android:textColorHint="@color/colorAccent"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/chip_color_selector"
+                app:boxStrokeWidth="2dp"
+                app:endIconDrawable="@drawable/ic_clear"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/colorAccentB"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/colorAccentD"
+                app:startIconDrawable="@drawable/ic_user"
+                app:startIconTint="@color/colorAccentA">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/MaterialTextInputUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/raleway_semibold"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorAccent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- For Edit Text -->
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:id="@+id/MainLayout_EditText_Password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/MainLayout_EditText_Name"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:elevation="15dp"
+                android:hint="PASSWORD"
+                android:textColorHint="@color/colorAccent"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/chip_color_selector"
+                app:boxStrokeWidth="2dp"
+                app:endIconCheckable="true"
+                app:endIconDrawable="@drawable/drawable_eye_selector"
+                app:endIconMode="password_toggle"
+
+                app:endIconTint="@color/chip_color_selector"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/colorAccentD"
+                app:startIconDrawable="@drawable/ic_key"
+                app:startIconTint="@color/colorAccentA"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/MaterialTextInputPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/raleway_semibold"
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorAccent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/Button_Enter"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/MainLayout_EditText_Password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="-30dp"
+                android:elevation="20dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:stateListAnimator="@null"
+                android:text="Login"
+                android:textColor="@color/colorAccentE"
+                android:textSize="17sp"
+                app:cornerRadius="15dp" />
+
+
+            <!--android:background="@drawable/button_cancel_background"-->
+            <TextView
+                android:id="@+id/Text_DoesntHaveAcoount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Button_Enter"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/raleway_regular"
+                android:gravity="center"
+                android:text="Don't Have an account ?"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/TextView_Create_Account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Text_DoesntHaveAcoount"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:gravity="center"
+                android:text="Create An Account"
+                android:textColor="@color/colorAccentB" />
+
+            <TextView
+                android:id="@+id/TextView_StartAsGuest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/TextView_Create_Account"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:fontFamily="@font/raleway_semibold"
+                android:gravity="center"
+                android:text="Enter As Guest"
+                android:textColor="@color/colorAccent" />
+
+            <ImageView
+                android:id="@+id/image_view_animation"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_below="@id/TextView_StartAsGuest"
+                android:layout_centerHorizontal="true" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

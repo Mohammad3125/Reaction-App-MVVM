@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:Tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_slanted_gradient"
+    android:clipToPadding="false"
+    Tools:context=".view.fragments.FragmentEditProfile">
+
+    <Button
+        android:id="@+id/edit_profile_button_done"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DONE"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/edit_profile_button_cancel"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CANCEL"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_semibold"
+        android:text="EDIT PROFILE"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/edit_profile_profile_container"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="39dp"
+        android:clipToPadding="false"
+        app:cardCornerRadius="76dp"
+        app:cardElevation="14dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_button_cancel"
+        app:strokeColor="@color/colorAccent"
+        app:strokeWidth="2dp">
+
+        <ImageView
+            android:id="@+id/edit_profile_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            Tools:layout_editor_absoluteX="121dp"
+            Tools:layout_editor_absoluteY="158dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/edit_profile_fab_edit_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="TODO"
+        android:tint="@android:color/white"
+        app:elevation="22dp"
+        app:fabSize="mini"
+        app:layout_constraintEnd_toEndOf="@id/edit_profile_profile_container"
+        app:layout_constraintTop_toTopOf="@id/edit_profile_profile_container"
+        app:srcCompat="@drawable/ic_edit" />
+
+
+    <Button
+        android:id="@+id/edit_profile_pick_image"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="PICK IMAGE"
+        app:cornerRadius="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_profile_profile_container"
+        app:strokeColor="@color/colorAccentA"
+        app:strokeWidth="2dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

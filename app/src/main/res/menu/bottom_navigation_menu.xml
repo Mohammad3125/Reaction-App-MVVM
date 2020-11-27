@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fMainPage"
+        android:icon="@drawable/ic_home"
+        android:title="MainPage" />
+    <item
+        android:id="@+id/fUserAdd"
+        android:icon="@drawable/ic_user"
+        android:title="Users" />
+    <item
+        android:id="@+id/fBluetoothScanner"
+        android:icon="@drawable/ic_bluetooth"
+        android:title="Bluetooth" />
+    <item
+        android:id="@+id/fSettingPreferences"
+        android:icon="@drawable/ic_setting"
+        android:title="Setting" />
+</menu>

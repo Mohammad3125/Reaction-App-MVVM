@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_dialog"
+    android:clipToPadding="false">
+
+
+    <TextView
+        android:id="@+id/dialog_textview_adduser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/raleway_bold_italic"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="ADD USER"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/user_profile_container"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@id/dialog_textview_adduser"
+        android:layout_centerInParent="true"
+        android:clipToPadding="false"
+        app:cardCornerRadius="39dp">
+
+        <ImageView
+            android:id="@+id/image_user_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <ImageView
+        android:id="@+id/button_from_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_container"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_camera"
+        app:strokeColor="@color/colorAccentB" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/dialog_username_layout_edittext"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_from_camera"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:elevation="15dp"
+        android:hint="USERNAME"
+        android:textColorHint="@color/colorAccent"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/chip_color_selector"
+        app:boxStrokeWidth="2dp"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/colorAccentB"
+        app:errorEnabled="true"
+        app:errorTextColor="@color/colorAccentD"
+        app:startIconDrawable="@drawable/ic_user"
+        app:startIconTint="@color/colorAccentA">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialog_username_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/raleway_semibold"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorAccent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_username_layout_edittext"
+        android:layout_centerHorizontal="true"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/dialog_button_createuser"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="5"
+            android:text="Create" />
+
+        <Button
+            android:id="@+id/dialog_button_cancel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="5"
+            android:text="Cancel"
+            android:textColor="@color/colorAccentD" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background_dialog"
+    android:padding="5dp"
+    android:layout_margin="10dp"
+    android:elevation="7dp"
+    android:outlineProvider="background"
+    android:clipToPadding="false"
+    android:layout_width="match_parent" android:layout_height="60dp">
+
+    <ImageView
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:id="@+id/Icon_Device_ID"
+        android:src="@drawable/device"
+        android:tint="@color/colorAccent"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"/>
+    <View
+        android:layout_width="2dp"
+        android:id="@+id/View_Line"
+        android:alpha="0.4"
+        android:layout_height="40dp"
+        android:layout_toEndOf="@id/Icon_Device_ID"
+        android:background="@color/colorAccentD"
+        android:layout_marginStart="5dp"
+        android:layout_centerVertical="true"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_toEndOf="@id/View_Line"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_Device_Name"
+        android:text="Pod 293"
+        android:textColor="@color/colorAccentB"
+        android:textStyle="bold"
+        android:textSize="14sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextVIew_Device_Address"
+            android:textColor="@color/colorAccentB"
+            android:textStyle="bold"
+            android:text="8c:12:57:f3:12:43"
+            android:layout_marginTop="5dp"
+            android:textSize="10sp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/Button_Connect_ListView"
+        android:id="@+id/Signal_TextView"
+        android:layout_marginEnd="10dp"
+        android:text="-25dB"
+        android:textColor="@color/colorAccentB"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:layout_centerVertical="true"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:id="@+id/Button_Connect_ListView"
+        android:text="Connect"
+        android:textSize="13sp"
+        android:textColor="@color/colorBackgroundDark"
+        style="@style/Buttons_Style"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="5dp"
+        android:layout_alignParentEnd="true"/>
+
+
+
+
+
+</RelativeLayout>

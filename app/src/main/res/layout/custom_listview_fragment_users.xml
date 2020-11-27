@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainlayout_custom_listview_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="10dp"
+    android:paddingStart="5dp"
+    android:clipToPadding="false">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/user_profile_container_list_view"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+
+        app:strokeColor="@color/colorAccent"
+        app:strokeWidth="2dp"
+        android:layout_marginStart="2dp"
+        android:elevation="20dp"
+        android:clipToPadding="false"
+        app:cardCornerRadius="31.2dp"
+        app:cardElevation="15dp">
+
+        <ImageView
+            android:id="@+id/user_profile_image_view_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignBottom="@id/user_profile_container_list_view"
+            android:layout_toEndOf="@id/user_profile_container_list_view"
+            android:layout_marginBottom="-10dp"
+            android:background="@color/colorBackgroundDarkest"/>
+
+    <TextView
+        android:id="@+id/Person_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/user_profile_container_list_view"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@id/user_profile_container_list_view"
+        android:fontFamily="@font/raleway_regular_italic"
+        android:text="Ashley Smith"
+        android:textColor="@android:color/white" />
+
+
+
+    <TextView
+        android:id="@+id/IsAdmingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/raleway_regular_italic"
+        android:text="Admin"
+        android:textColor="@color/colorAccentB"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/listview_users_button_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_more"
+        android:visibility="visible"
+        app:tint="@color/colorAccentB" />
+
+
+</RelativeLayout>
