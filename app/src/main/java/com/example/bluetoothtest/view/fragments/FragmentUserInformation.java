@@ -20,7 +20,6 @@ import androidx.navigation.Navigation;
 import com.example.bluetoothtest.utility.WindowSetting;
 import com.example.bluetoothtest.view.fragments.FragmentUserInformationArgs;
 import com.example.bluetoothtest.view.fragments.FragmentUserInformationDirections;
-import com.example.bluetoothtest.utility.DbHelper;
 import com.example.bluetoothtest.utility.ProfileHelper;
 import com.example.bluetoothtest.R;
 import com.example.bluetoothtest.model.entities.users.User;
@@ -38,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class FragmentUserInformation extends Fragment {
+
     TextView playerName;
     TextView reactionTime;
     TextView parentName;
@@ -46,13 +46,8 @@ public class FragmentUserInformation extends Fragment {
     LineChart lineChart;
     CardView cardViewContainer;
     ArrayList<Entry> chartData = new ArrayList<>();
+    WindowSetting windowSetting;
 
-    public static final int PERSON_NAME_KEY = 0;
-    public static final int PERSON_PARENT_KEY = 1;
-    public static final int PERSON_REACTION_TIME_KEY = 2;
-
-    public static final String TRANSITION_USERNAME_KEY = "F_USERNAME_KEY";
-    public static final String TRANSITION_CIRCLE_KEY = "F_CIRCLE_KEY";
 
     @Nullable
     @Override
@@ -68,10 +63,6 @@ public class FragmentUserInformation extends Fragment {
         initGraph();
 
 
-        WindowSetting windowSetting = new WindowSetting(getActivity().getWindow());
-
-        windowSetting.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.colorBackgroundDarker));
-
         UserViewModel userViewModel = new ViewModelProvider(this).
                 get(UserViewModel.class);
 
@@ -86,8 +77,7 @@ public class FragmentUserInformation extends Fragment {
 
         String profilePath = user.profilePath;
 
-        if (profilePath != null && !profilePath.isEmpty())
-            ProfileHelper.getImage(profilePath, profileImage);
+        ProfileHelper.getImage(profilePath, profileImage);
 
 
         getBack.setOnClickListener(m -> Navigation.findNavController(m).navigateUp());
@@ -110,6 +100,14 @@ public class FragmentUserInformation extends Fragment {
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         dataSet.setCubicIntensity(0.1f);
         dataSet.setDrawValues(false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        windowSetting = new WindowSetting(getActivity().getWindow());
+        windowSetting.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.colorBackgroundDarker));
     }
 
     private void initView(View view) {

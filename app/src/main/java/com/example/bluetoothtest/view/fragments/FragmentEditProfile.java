@@ -31,9 +31,6 @@ import java.util.UUID;
 
 public class FragmentEditProfile extends Fragment {
 
-    //TODO
-    // MIGRATING TWO TABLES INTO ONE
-
     private String profileBitmapPath;
 
     private String nameFile;
@@ -46,10 +43,23 @@ public class FragmentEditProfile extends Fragment {
 
     Button buttonDone;
 
+    WindowSetting windowSetting;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_edit_profile, container, false);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        windowSetting = new WindowSetting(getActivity().getWindow());
+        windowSetting.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.colorAccentG));
+
+        uploaderHelper = new ProfileHelper(getContext(), getActivity().getContentResolver());
 
     }
 
@@ -59,9 +69,6 @@ public class FragmentEditProfile extends Fragment {
 
         profileImage = view.findViewById(R.id.edit_profile_image_view);
 
-        WindowSetting windowSetting = new WindowSetting(getActivity().getWindow());
-
-        windowSetting.setStatusBarColor(ContextCompat.getColor(getContext(),R.color.colorAccentG));
 
         FragmentEditProfileArgs arguments = FragmentEditProfileArgs.fromBundle(getArguments());
 
@@ -73,13 +80,7 @@ public class FragmentEditProfile extends Fragment {
 
         String username = user.name;
 
-
-        if (profileBitmapPath != null && !profileBitmapPath.isEmpty())
-            ProfileHelper.
-                    getImage(profileBitmapPath, profileImage);
-
-        uploaderHelper =
-                new ProfileHelper(getContext(), getActivity().getContentResolver());
+        ProfileHelper.getImage(profileBitmapPath, profileImage);
 
 
         view.findViewById(R.id.edit_profile_button_cancel).
@@ -103,15 +104,11 @@ public class FragmentEditProfile extends Fragment {
                 });
 
         view.findViewById(R.id.edit_profile_pick_image).
-                setOnClickListener(v -> {
-                    startCameraIntent();
-                });
+                setOnClickListener(v -> startCameraIntent());
 
 
         view.findViewById(R.id.edit_profile_fab_edit_image).
-                setOnClickListener(v -> {
-                    startCameraIntent();
-                });
+                setOnClickListener(v -> startCameraIntent());
 
 
     }

@@ -53,8 +53,6 @@ public class RecyclerViewAdapter extends ListAdapter<User, RecyclerViewAdapter.V
         TextView isAdmin;
         CardView cardViewContainer;
         View view;
-        OnRemoveClickedListener onRemoveClickedListener;
-        OnUserItemClickListener onUserItemClickListener;
         User user;
 
         public ViewHolder(@NonNull View view) {
@@ -76,8 +74,7 @@ public class RecyclerViewAdapter extends ListAdapter<User, RecyclerViewAdapter.V
             this.user = user;
             String userProfilePath = user.profilePath;
 
-            if (userProfilePath != null && !userProfilePath.isEmpty())
-                ProfileHelper.getImage(userProfilePath, userProfileImageView/*ImageView Profile*/);
+            ProfileHelper.getImage(userProfilePath, userProfileImageView/*ImageView Profile*/);
 
             username.setText(user.name);
 

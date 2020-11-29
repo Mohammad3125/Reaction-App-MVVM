@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
@@ -51,10 +52,6 @@ public class FragmentUsersAdd extends Fragment {
 
     private static final int RESULT_OK = -1;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
 
     MaterialButton button;
     ImageView buttonFromCamera;
@@ -79,17 +76,6 @@ public class FragmentUsersAdd extends Fragment {
 
     private int counter = 0;
 
-    public static final String TRANSITION_USERNAME_KEY = "USERNAME_KEY";
-    public static final String TRANSITION_CIRCLE_KEY = "CIRCLE_KEY";
-
-    public static final String KEY_USERNAME = "INFO:USER";
-    public static final String KEY_PARENT = "INFO:USER_PARENT";
-    public static final String KEY_PROFILE_IMAGE_PATH = "INFO:IMAGE_URI";
-    public static final String KEY_REACTION_TIME = "INFO:USER_REACTION";
-
-    public static final int GALLERY_REQUEST_CODE_PROFILE_IMAGE = 123;
-    public static final int REQUEST_IMAGE_CAPTURE = 124;
-
     private static final int BUILD_VERSION = Build.VERSION.SDK_INT;
 
     WindowSetting windowSetting;
@@ -105,16 +91,15 @@ public class FragmentUsersAdd extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        uploaderHelper =
-                new ProfileHelper(context, getActivity().getContentResolver());
-
         initViews(view);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         configRecyclerView(context);
 
-        adapter.setRemoveListener(user -> userViewModel.delete(user));
+        adapter.setRemoveListener(user -> {
+            userViewModel.delete(user);
+        });
 
         adapter.setItemListener((position, username) -> {
             NavDirections action = FragmentUsersAddDirections.
@@ -225,7 +210,7 @@ public class FragmentUsersAdd extends Fragment {
 
                             userViewModel.insert(new User(usernameText, profileBitmapPath, MainActivity.username, 0));
 
-                            profileBitmapPath = null;
+                            finalBitmap = null;
 
                             dialog.cancel();
 
@@ -252,6 +237,17 @@ public class FragmentUsersAdd extends Fragment {
 
         //for being able to start CropImage from a fragment we should call the method differently
         ProfileHelper.startCropImage(this, context);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        uploaderHelper =
+                new ProfileHelper(context, getActivity().getContentResolver());
+
+        windowSetting = new WindowSetting(getActivity().getWindow()).
+                setStatusBarColor(ContextCompat.getColor(context, R.color.colorAccentH));
+
     }
 
 

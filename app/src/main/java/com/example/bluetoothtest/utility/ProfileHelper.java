@@ -19,8 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.bluetoothtest.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -107,8 +109,15 @@ public class ProfileHelper {
 
     public static void getImage(String path, ImageView imageView) {
 
-        //File getImage = new File(path);
-        Picasso.get().load(new File(path)).noFade().into(imageView);
+        if (path != null) {
+            //Calling fit method will prevent some issues when there is lot of pictures loading
+            //also it prevents extra memory usage
+            Picasso.get().load(new File(path)).fit().noFade().into(imageView);
+            return;
+        }
+        //Loading default image if the path is null
+        imageView.setImageDrawable(ContextCompat.getDrawable(imageView.getContext(), R.drawable.ic_default_user));
+
     }
 
     public String uploadAsCache(Bitmap bitmap, String name) {
