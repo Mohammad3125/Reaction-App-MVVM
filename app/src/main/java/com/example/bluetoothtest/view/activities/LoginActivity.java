@@ -39,20 +39,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final int BUILD_VERSION = Build.VERSION.SDK_INT;
 
-    public static final String IMAGE_VIEW_PAIR_ID = "login:image_view";
-    public static final String TEXT_VIEW_PAIR_ID = "login:text_logo";
-
-
     TextInputEditText textInputUsername, textInputPassword;
     TextView enterAsGuestText, createAnAccountText, appName;
     Button enterButton;
-    ImageView imageApp;
     TextInputLayout layoutInputTextName, layoutInputTextPassword;
 
     AdminViewModel adminViewModel;
 
-
-    private boolean flipIcon = false;
 
     WindowSetting windowSetting;
     // Finals

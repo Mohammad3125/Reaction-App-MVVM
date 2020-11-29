@@ -72,7 +72,7 @@ public class FragmentEditProfile extends Fragment {
 
         FragmentEditProfileArgs arguments = FragmentEditProfileArgs.fromBundle(getArguments());
 
-        UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        UserViewModel userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         User user = userViewModel.getUser(arguments.getPersonName());
 

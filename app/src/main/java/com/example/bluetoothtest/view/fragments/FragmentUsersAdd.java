@@ -93,7 +93,7 @@ public class FragmentUsersAdd extends Fragment {
 
         initViews(view);
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         configRecyclerView(context);
 
@@ -174,7 +174,6 @@ public class FragmentUsersAdd extends Fragment {
                     .setOnClickListener(view12 -> {
                         TextInputEditText editText = layoutDialog.findViewById(R.id.dialog_username_edittext);
                         TextInputLayout layoutEditText = layoutDialog.findViewById(R.id.dialog_username_layout_edittext);
-
 
                         editText.addTextChangedListener(new TextWatcher() {
                             @Override

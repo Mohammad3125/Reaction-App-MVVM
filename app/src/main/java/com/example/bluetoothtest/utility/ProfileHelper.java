@@ -184,7 +184,6 @@ public class ProfileHelper {
     }
 
     public static void startCropImage(Activity activity) {
-
         CropImage
                 .activity().setGuidelines(CropImageView.Guidelines.ON)
                 .setCropShape(CropImageView.CropShape.OVAL)

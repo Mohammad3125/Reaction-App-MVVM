@@ -35,16 +35,11 @@ import java.util.UUID;
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    public static final int REQUEST_FROM_CAMERA = 123;
-    public static final int GALLERY_REQUEST_CODE_PROFILE_IMAGE = 12;
 
     private static final int MINIMUM_LENGTH_TEXT = 3;
     private static final int MAXIMUM_LENGTH_TEXT = 24;
 
     private static final int MINIMUM_LENGTH_PASSWORD = 6;
-
-    public static final int REQUEST_IMAGE_CAPTURE = 124;
-
 
     WindowSetting windowSetting;
 
@@ -194,7 +189,6 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
             // Uploading Final Image
             profileBitmapPath = uploaderHelper.uploadProfile(nameFile, usernameText, finalBitmap);
-
 
             adminViewModel.insert(new Admin(usernameText,
                     password,

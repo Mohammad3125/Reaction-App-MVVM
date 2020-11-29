@@ -63,7 +63,7 @@ public class FragmentUserInformation extends Fragment {
         initGraph();
 
 
-        UserViewModel userViewModel = new ViewModelProvider(this).
+        UserViewModel userViewModel = new ViewModelProvider(requireActivity()).
                 get(UserViewModel.class);
 
         FragmentUserInformationArgs arguments = FragmentUserInformationArgs.fromBundle(getArguments());
