@@ -51,7 +51,6 @@ public class RecyclerViewAdapter extends ListAdapter<User, RecyclerViewAdapter.V
         TextView username;
         ImageView moreButton;
         TextView isAdmin;
-        CardView cardViewContainer;
         View view;
         User user;
 
@@ -61,7 +60,6 @@ public class RecyclerViewAdapter extends ListAdapter<User, RecyclerViewAdapter.V
             username = view.findViewById(R.id.Person_Name);
             moreButton = view.findViewById(R.id.listview_users_button_more);
             isAdmin = view.findViewById(R.id.IsAdmingTextView);
-            cardViewContainer = view.findViewById(R.id.user_profile_container_list_view);
             this.view = view;
 
 

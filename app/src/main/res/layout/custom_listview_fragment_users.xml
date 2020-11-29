@@ -4,56 +4,43 @@
     android:id="@+id/mainlayout_custom_listview_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp"
+    android:clipToPadding="false"
+    android:paddingStart="5dp"
     android:paddingTop="10dp"
     android:paddingEnd="10dp"
-    android:paddingStart="5dp"
-    android:clipToPadding="false">
+    android:paddingBottom="10dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/user_profile_container_list_view"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/user_profile_image_view_list_view"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:elevation="13dp"
+        android:scaleType="centerCrop"
+        app:shapeAppearance="@style/circleImageView" />
 
-        app:strokeColor="@color/colorAccent"
-        app:strokeWidth="2dp"
-        android:layout_marginStart="2dp"
-        android:elevation="20dp"
-        android:clipToPadding="false"
-        app:cardCornerRadius="31.2dp"
-        app:cardElevation="15dp">
 
-        <ImageView
-            android:id="@+id/user_profile_image_view_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginStart="10dp"
-            android:layout_alignBottom="@id/user_profile_container_list_view"
-            android:layout_toEndOf="@id/user_profile_container_list_view"
-            android:layout_marginBottom="-10dp"
-            android:background="@color/colorBackgroundDarkest"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignBottom="@id/user_profile_image_view_list_view"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="-10dp"
+        android:layout_toEndOf="@id/user_profile_image_view_list_view"
+        android:background="@color/colorAccentF" />
 
     <TextView
         android:id="@+id/Person_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/user_profile_container_list_view"
+        android:layout_alignTop="@id/user_profile_image_view_list_view"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@id/user_profile_container_list_view"
+        android:layout_toEndOf="@id/user_profile_image_view_list_view"
         android:fontFamily="@font/raleway_regular_italic"
         android:text="Ashley Smith"
         android:textColor="@android:color/white" />
-
 
 
     <TextView

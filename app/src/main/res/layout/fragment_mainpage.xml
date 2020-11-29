@@ -7,7 +7,9 @@
     Tools:context=".view.fragments.FragmentMainPage"
     android:clipToPadding="false">
 
+
     <RelativeLayout
+
         android:id="@+id/layout_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

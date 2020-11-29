@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_dialog"
     android:padding="5dp"
     android:layout_margin="10dp"
     android:elevation="7dp"
     android:outlineProvider="background"
     android:clipToPadding="false"
-    android:layout_width="match_parent" android:layout_height="60dp">
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
 
     <ImageView
         android:layout_width="42dp"
@@ -65,12 +67,13 @@
         android:layout_centerVertical="true"/>
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="12dp"
+        app:strokeColor="@color/colorAccentA"
         android:id="@+id/Button_Connect_ListView"
         android:text="Connect"
         android:textSize="13sp"
-        android:textColor="@color/colorBackgroundDark"
-        style="@style/Buttons_Style"
         android:layout_centerVertical="true"
         android:layout_marginEnd="5dp"
         android:layout_alignParentEnd="true"/>

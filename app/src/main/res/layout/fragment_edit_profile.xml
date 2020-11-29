@@ -41,29 +41,24 @@
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/edit_profile_profile_container"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="39dp"
-        android:clipToPadding="false"
-        app:cardCornerRadius="76dp"
-        app:cardElevation="14dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_profile_button_cancel"
-        app:strokeColor="@color/colorAccent"
-        app:strokeWidth="2dp">
 
-        <ImageView
+
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/edit_profile_image_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="39dp"
+            android:elevation="13dp"
             android:scaleType="centerCrop"
-            Tools:layout_editor_absoluteX="121dp"
-            Tools:layout_editor_absoluteY="158dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_profile_button_cancel"
+            app:shapeAppearance="@style/circleImageView"
+            app:strokeColor="@color/colorAccent"
+            app:strokeWidth="1dp" />
 
-    </com.google.android.material.card.MaterialCardView>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/edit_profile_fab_edit_image"
@@ -73,8 +68,8 @@
         android:tint="@android:color/white"
         app:elevation="22dp"
         app:fabSize="mini"
-        app:layout_constraintEnd_toEndOf="@id/edit_profile_profile_container"
-        app:layout_constraintTop_toTopOf="@id/edit_profile_profile_container"
+        app:layout_constraintEnd_toEndOf="@id/edit_profile_image_view"
+        app:layout_constraintTop_toTopOf="@id/edit_profile_image_view"
         app:srcCompat="@drawable/ic_edit" />
 
 
@@ -88,7 +83,7 @@
         app:cornerRadius="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_profile_profile_container"
+        app:layout_constraintTop_toBottomOf="@id/edit_profile_image_view"
         app:strokeColor="@color/colorAccentA"
         app:strokeWidth="2dp" />
 

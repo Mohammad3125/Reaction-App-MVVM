@@ -97,9 +97,7 @@ public class FragmentUsersAdd extends Fragment {
 
         configRecyclerView(context);
 
-        adapter.setRemoveListener(user -> {
-            userViewModel.delete(user);
-        });
+        adapter.setRemoveListener(user -> userViewModel.delete(user));
 
         adapter.setItemListener((position, username) -> {
             NavDirections action = FragmentUsersAddDirections.

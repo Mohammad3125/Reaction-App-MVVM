@@ -117,7 +117,6 @@ public class FragmentUserInformation extends Fragment {
         profileImage = view.findViewById(R.id.image_user_profile);
         getBack = view.findViewById(R.id.get_back_icon);
         lineChart = view.findViewById(R.id.chart_user_reaction);
-        cardViewContainer = view.findViewById(R.id.user_profile);
     }
 
     @Override
