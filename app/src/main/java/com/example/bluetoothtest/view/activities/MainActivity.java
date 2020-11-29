@@ -7,11 +7,14 @@ import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceDataStore;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.le.ScanResult;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,35 +29,27 @@ import com.example.bluetoothtest.utility.BleHelper;
 import com.example.bluetoothtest.utility.WindowSetting;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO
-    // EACH TIME WE CLICK ON THE SPECIFIC FRAGMENT IT GET ADDED TO THE FRAGMENT BACK STACK
-    // THIS SHOULD BE PREVENTED
 
-    private static final String TAG = "MainActivity";
+    public static final String userTag = "tg-user";
+
     boolean Enabled = false, Scanning = false;
     BleHelper BleHelpers;
 
     public static String username;
-
-    private FragmentMainPage homeFragment = new FragmentMainPage();
-    private Set<ScanResult> devices = new HashSet<>();
 
     private BottomNavigationView bottomNavigationView;
     private View bottomNavigationShadow;
 
     public WindowSetting windowSetting;
 
-    private ProgressBar progressBar;
-    private RelativeLayout layoutFragmentContainer;
-    private View ShadowBottomNavigation;
     private static final int BUILD_VERSION = Build.VERSION.SDK_INT;
 
-    private int lastFragmentId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +58,18 @@ public class MainActivity extends AppCompatActivity {
 
         setTheme(R.style.SettingFragmentStyle); // Changing SettingPreferences Theme
 
-        username = getIntent().getExtras().getString("UserName");
-
 
         windowSetting = new WindowSetting(getWindow());
         windowSetting.windowsFullScreen().
                 setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.colorAccentH));
 
         bottomNavigationShadow = findViewById(R.id.shadow_bottom_navigation);
+
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null)
+            username = bundle.getString("UserName");
 
 
           /*  if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE))
@@ -183,6 +182,9 @@ public class MainActivity extends AppCompatActivity {
                 bottomNavigationShadow.setVisibility(View.VISIBLE);
             }
         });
+
+
+
 
     }
 

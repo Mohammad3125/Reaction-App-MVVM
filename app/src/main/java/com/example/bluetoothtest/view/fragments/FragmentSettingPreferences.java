@@ -1,6 +1,8 @@
 package com.example.bluetoothtest.view.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,6 +12,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.example.bluetoothtest.BuildConfig;
 import com.example.bluetoothtest.view.activities.LoginActivity;
 import com.example.bluetoothtest.R;
+import com.example.bluetoothtest.view.activities.MainActivity;
+import com.example.bluetoothtest.view.activities.SplashScreen;
 
 public class FragmentSettingPreferences extends PreferenceFragmentCompat {
 
@@ -22,14 +26,15 @@ public class FragmentSettingPreferences extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.setting_page, rootKey);
 
         signOutPreference = findPreference("sign-out-button");
-        signOutPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Intent loginPage = new Intent(getActivity(), LoginActivity.class);
-                startActivity(loginPage);
-                getActivity().finish();
-                return false;
-            }
+        signOutPreference.setOnPreferenceClickListener(preference -> {
+            getContext().
+                    getSharedPreferences(SplashScreen.SHARED_PREFERENCES_TAG, Context.MODE_PRIVATE).
+                    edit().putBoolean(SplashScreen.LOGIN_STATE_KEY, false).apply();
+
+                    Intent loginPage = new Intent(getActivity(), LoginActivity.class);
+            startActivity(loginPage);
+            getActivity().finish();
+            return false;
         });
 
         appVersionPreference = findPreference("app-version");

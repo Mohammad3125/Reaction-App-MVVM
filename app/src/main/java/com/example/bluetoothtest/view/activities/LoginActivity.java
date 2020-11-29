@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Image;
 import android.os.Build;
@@ -120,8 +121,15 @@ public class LoginActivity extends AppCompatActivity {
             dialog.show();
 
             dialog.findViewById(R.id.image_view_check_drawable).startAnimation
-                    (AnimationUtils.loadAnimation(dialog.getContext(),R.anim.anim_rotate));
+                    (AnimationUtils.loadAnimation(dialog.getContext(), R.anim.anim_rotate));
 
+            SharedPreferences sharedPreferences = getSharedPreferences(SplashScreen.SHARED_PREFERENCES_TAG, MODE_PRIVATE);
+
+
+            sharedPreferences.edit().putString(MainActivity.userTag, nameText).apply();
+
+
+            sharedPreferences.edit().putBoolean(SplashScreen.LOGIN_STATE_KEY, true).apply();
 
 
             new Handler(getMainLooper()).postDelayed(() -> {

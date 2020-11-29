@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,14 +17,13 @@ import com.example.bluetoothtest.R;
 import com.example.bluetoothtest.utility.WindowSetting;
 
 public class SplashScreen extends AppCompatActivity {
-    ImageView logo;
     TextView textBlazePod;
     TextView textMoreansStudio;
     WindowSetting windowSetting;
     private final int TIME_SPLASH_SCREEN = 3;
-    private final int ANIMATION_FADE_TIME = 250;
-    private final int BUILD_VERSION = Build.VERSION.SDK_INT;
-    private final int STATUS_BAR_COLOR_ID = R.color.colorBackgroundDarker;
+
+    public static final String SHARED_PREFERENCES_TAG = "tg-sharedPreference";
+    public static final String LOGIN_STATE_KEY = "lg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,39 +31,27 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         initViews();
-        setTransitions();
 
         windowSetting = new WindowSetting(getWindow());
         windowSetting.windowsFullScreen().hideStatusBar();
 
 
-        //setStatusBarColor(STATUS_BAR_COLOR_ID);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent loginPage = new Intent(SplashScreen.this, LoginActivity.class);
-            /*    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        SplashScreen.this,
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_TAG, MODE_PRIVATE);
 
-                        new Pair<>(logo, LoginActivity.IMAGE_VIEW_PAIR_ID),
-                        new Pair<>(textBlazePod, LoginActivity.TEXT_VIEW_PAIR_ID)
-                );
-                //startActivity(loginPage, options.toBundle());*/
+        new Handler().postDelayed(() -> {
+            Class<?> myClass = MainActivity.class;
 
-                startActivity(loginPage);
-                finish();
-            }
+            if (!sharedPreferences.getBoolean(LOGIN_STATE_KEY, false))
+                myClass = LoginActivity.class;
+
+            String name = sharedPreferences.getString(MainActivity.userTag, "default-user");
+            startActivity(new Intent(this, myClass).putExtra("UserName", name));
+
+            finish();
         }, TIME_SPLASH_SCREEN * 1000);
 
     }
 
-    private void setTransitions() {
-        //getWindow().setEnterTransition(new Explode());
-        //getWindow().setExitTransition(new Explode());
-
-        // Window window = getWindow();
-        //window.setAllowEnterTransitionOverlap(true);
-    }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
@@ -71,12 +59,6 @@ public class SplashScreen extends AppCompatActivity {
         startAnimations();
     }
 
-
-    private void fadeAnimations() {
-        textBlazePod.animate().alpha(0f).setDuration(ANIMATION_FADE_TIME);
-        textMoreansStudio.animate().alpha(0f).setDuration(ANIMATION_FADE_TIME);
-
-    }
 
     private void startAnimations() {
         textBlazePod.animate().alpha(1f).setDuration(500);
