@@ -21,13 +21,17 @@ public class User {
     @Nullable
     public String profilePath;
 
+    @ColumnInfo(name = "parent")
+    public String parent;
+
     @ColumnInfo(name = "reaction_time")
     public int reactionTime;
 
-    public User(@NotNull String name, String profilePath, int reactionTime) {
+    public User(@NotNull String name, @Nullable String profilePath, String parent, int reactionTime) {
         this.name = name;
         this.reactionTime = reactionTime;
         this.profilePath = profilePath;
+        this.parent = parent;
     }
 
 

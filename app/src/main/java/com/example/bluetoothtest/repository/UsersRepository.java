@@ -21,7 +21,6 @@ public class UsersRepository {
 
     Application application;
 
-    LiveData<List<User>> users;
     LiveData<List<Admin>> admins;
 
 
@@ -32,7 +31,6 @@ public class UsersRepository {
                 getINSTANCE(application);
 
         userDAO = appDatabase.userDOA();
-        users = userDAO.getUsers();
 
         adminDAO = appDatabase.adminDOA();
         admins = adminDAO.getAdmins();
@@ -75,8 +73,8 @@ public class UsersRepository {
         return userDAO.getUser(name);
     }
 
-    public LiveData<List<User>> getUsers() {
-        return users;
+    public LiveData<List<User>> getUsers(String parentName) {
+        return userDAO.getUsers(parentName);
     }
 
     public Boolean doesUserExist(String name) {

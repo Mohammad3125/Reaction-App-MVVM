@@ -84,7 +84,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
         uploaderHelper = new ProfileHelper(this, getContentResolver());
 
-         adminViewModel = new ViewModelProvider(this).get(AdminViewModel.class);
+        adminViewModel = new ViewModelProvider(this).get(AdminViewModel.class);
 
         initViews();
 
@@ -184,7 +184,6 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             }
 
 
-
             if (adminViewModel.doesAdminExist(usernameText)) {
                 DialogValidator.setError("A User With That Username Exists", usernameLayout);
                 return;
@@ -243,9 +242,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
             if (resultCode == RESULT_OK) {
-                Uri uri = result.getUri();
+                if (result == null) return;
 
-                finalBitmap = uploaderHelper.createBitmapFromUri(uri);
+                finalBitmap = uploaderHelper.createBitmapFromUri(result.getUri());
 
                 UUID randomToken = UUID.randomUUID();
 

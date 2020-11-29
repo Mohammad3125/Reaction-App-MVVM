@@ -19,8 +19,8 @@ public interface UserDAO {
     @Query("SELECT * FROM users_table WHERE name = :username")
     User getUser(String username);
 
-    @Query("SELECT * FROM users_table")
-    LiveData<List<User>> getUsers();
+    @Query("SELECT * FROM users_table WHERE parent =:parentName")
+    LiveData<List<User>> getUsers(String parentName);
 
     @Update(entity = User.class)
     void update(UserProfileUpdatePartial updatePartial);

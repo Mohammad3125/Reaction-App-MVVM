@@ -23,13 +23,10 @@ public class UserViewModel extends AndroidViewModel {
 
         appRepository = new UsersRepository(application);
 
-        users = appRepository.getUsers();
-
-
     }
 
-    public LiveData<List<User>> getUsers() {
-        return users;
+    public LiveData<List<User>> getUsers(String parentName) {
+        return appRepository.getUsers(parentName);
     }
 
     public User getUser(String name) {
