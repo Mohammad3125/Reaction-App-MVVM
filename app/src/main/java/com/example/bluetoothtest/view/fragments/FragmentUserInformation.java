@@ -1,6 +1,5 @@
 package com.example.bluetoothtest.view.fragments;
 
-import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,11 +17,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.bluetoothtest.utility.WindowSetting;
-import com.example.bluetoothtest.view.fragments.FragmentUserInformationArgs;
-import com.example.bluetoothtest.view.fragments.FragmentUserInformationDirections;
+import com.example.bluetoothtest.view.activities.MainActivity;
 import com.example.bluetoothtest.utility.ProfileHelper;
 import com.example.bluetoothtest.R;
-import com.example.bluetoothtest.model.entities.users.User;
+import com.example.bluetoothtest.model.database.entities.users.User;
 import com.example.bluetoothtest.view_model.UserViewModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -70,7 +68,7 @@ public class FragmentUserInformation extends Fragment {
 
         String personName = arguments.getPersonName();
 
-        User user = userViewModel.getUser(personName);
+        User user = userViewModel.getUser(personName, MainActivity.username);
 
         playerName.setText(user.name);
         reactionTime.setText(String.valueOf(user.reactionTime));

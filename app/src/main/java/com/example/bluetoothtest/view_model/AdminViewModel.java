@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.bluetoothtest.model.entities.admins.Admin;
+import com.example.bluetoothtest.model.database.entities.admins.Admin;
 import com.example.bluetoothtest.repository.UsersRepository;
 
 import java.util.List;

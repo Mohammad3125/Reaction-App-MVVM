@@ -1,4 +1,4 @@
-package com.example.bluetoothtest.model;
+package com.example.bluetoothtest.model.database;
 
 
 import android.content.Context;
@@ -9,10 +9,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.bluetoothtest.model.entities.admins.Admin;
-import com.example.bluetoothtest.model.entities.admins.AdminDAO;
-import com.example.bluetoothtest.model.entities.users.User;
-import com.example.bluetoothtest.model.entities.users.UserDAO;
+import com.example.bluetoothtest.model.database.entities.admins.Admin;
+import com.example.bluetoothtest.model.database.entities.admins.AdminDAO;
+import com.example.bluetoothtest.model.database.entities.users.User;
+import com.example.bluetoothtest.model.database.entities.users.UserDAO;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

@@ -5,15 +5,14 @@ import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.bluetoothtest.model.AppDatabase;
-import com.example.bluetoothtest.model.entities.admins.Admin;
-import com.example.bluetoothtest.model.entities.admins.AdminDAO;
-import com.example.bluetoothtest.model.entities.users.User;
-import com.example.bluetoothtest.model.entities.users.UserDAO;
-import com.example.bluetoothtest.model.entities.users.UserProfileUpdatePartial;
+import com.example.bluetoothtest.model.database.AppDatabase;
+import com.example.bluetoothtest.model.database.entities.admins.Admin;
+import com.example.bluetoothtest.model.database.entities.admins.AdminDAO;
+import com.example.bluetoothtest.model.database.entities.users.User;
+import com.example.bluetoothtest.model.database.entities.users.UserDAO;
+import com.example.bluetoothtest.model.database.entities.users.UserProfileUpdatePartial;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class UsersRepository {
     public UserDAO userDAO;
@@ -30,6 +29,8 @@ public class UsersRepository {
         AppDatabase appDatabase = AppDatabase.
                 getINSTANCE(application);
 
+
+
         userDAO = appDatabase.userDOA();
 
         adminDAO = appDatabase.adminDOA();
@@ -43,7 +44,6 @@ public class UsersRepository {
     }
 
     public boolean doesAdminExist(String name, String password) {
-        Toast.makeText(application, "I'm in getAdmin Method", Toast.LENGTH_SHORT).show();
         return adminDAO.doesAdminExist(name, password);
     }
 
@@ -64,21 +64,21 @@ public class UsersRepository {
     }
 
 
-    public void updateUser(String username, String profilePath) {
+    public void updateUser(String username, String profilePath, String parent) {
         AppDatabase.databaseExecutorService.execute(() ->
-                userDAO.update(new UserProfileUpdatePartial(username, profilePath)));
+                userDAO.update(new UserProfileUpdatePartial(username, profilePath, parent)));
     }
 
-    public User getUser(String name) {
-        return userDAO.getUser(name);
+    public User getUser(String name, String parentName) {
+        return userDAO.getUser(name, parentName);
     }
 
     public LiveData<List<User>> getUsers(String parentName) {
         return userDAO.getUsers(parentName);
     }
 
-    public Boolean doesUserExist(String name) {
-        return userDAO.doesUserExist(name);
+    public Boolean doesUserExist(String name, String parentName) {
+        return userDAO.doesUserExist(name, parentName);
     }
 
     public void insertToUser(User user) {

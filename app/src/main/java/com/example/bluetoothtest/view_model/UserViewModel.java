@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.bluetoothtest.model.entities.users.User;
+import com.example.bluetoothtest.model.database.entities.users.User;
 import com.example.bluetoothtest.repository.UsersRepository;
 
 import java.util.List;
@@ -29,8 +29,8 @@ public class UserViewModel extends AndroidViewModel {
         return appRepository.getUsers(parentName);
     }
 
-    public User getUser(String name) {
-        return appRepository.getUser(name);
+    public User getUser(String name, String parentName) {
+        return appRepository.getUser(name, parentName);
     }
 
     public void insert(User user) {
@@ -45,12 +45,12 @@ public class UserViewModel extends AndroidViewModel {
         appRepository.deleteFromUser(user);
     }
 
-    public void update(String username, String profilePath) {
-        appRepository.updateUser(username, profilePath);
+    public void update(String username, String profilePath, String parent) {
+        appRepository.updateUser(username, profilePath, parent);
     }
 
-    public boolean doesUserExists(String username) {
-        return appRepository.doesUserExist(username);
+    public boolean doesUserExists(String username, String parentName) {
+        return appRepository.doesUserExist(username, parentName);
     }
 
 }

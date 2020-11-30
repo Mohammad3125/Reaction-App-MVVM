@@ -1,4 +1,4 @@
-package com.example.bluetoothtest.model.entities.admins;
+package com.example.bluetoothtest.model.database.entities.users;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,28 +8,31 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
-@Entity(tableName = "admins_table")
-public class Admin {
 
-    @PrimaryKey
+@Entity(tableName = "users_table", primaryKeys = {"name", "parent"})
+public class User {
+
     @NonNull
     @ColumnInfo(name = "name")
     public String name;
-
-    @ColumnInfo(name = "password")
-    public String password;
 
     @ColumnInfo(name = "profile_path")
     @Nullable
     public String profilePath;
 
+    @NonNull
+    @ColumnInfo(name = "parent")
+    public String parent;
+
     @ColumnInfo(name = "reaction_time")
     public int reactionTime;
 
-    public Admin(@NotNull String name, @NotNull String password, @Nullable String profilePath, int reactionTime) {
+    public User(@NotNull String name, @Nullable String profilePath, @NonNull String parent, int reactionTime) {
         this.name = name;
         this.reactionTime = reactionTime;
-        this.password = password;
         this.profilePath = profilePath;
+        this.parent = parent;
     }
+
+
 }

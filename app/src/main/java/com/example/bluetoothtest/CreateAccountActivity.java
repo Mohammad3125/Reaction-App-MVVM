@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.bluetoothtest.view.fragments.fragmentutility.DialogValidator;
-import com.example.bluetoothtest.model.entities.admins.Admin;
+import com.example.bluetoothtest.model.database.entities.admins.Admin;
 import com.example.bluetoothtest.utility.WindowSetting;
 import com.example.bluetoothtest.utility.PermissionUtility;
 import com.example.bluetoothtest.utility.ProfileHelper;

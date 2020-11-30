@@ -1,7 +1,6 @@
-package com.example.bluetoothtest.model.entities.admins;
+package com.example.bluetoothtest.model.database.entities.admins;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.ColumnInfo;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;

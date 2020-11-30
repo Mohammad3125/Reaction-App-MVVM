@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.bluetoothtest.model.entities.users.User;
+import com.example.bluetoothtest.model.database.entities.users.User;
 import com.example.bluetoothtest.utility.WindowSetting;
 import com.example.bluetoothtest.view.activities.MainActivity;
 import com.example.bluetoothtest.utility.ProfileHelper;
@@ -74,7 +74,7 @@ public class FragmentEditProfile extends Fragment {
 
         UserViewModel userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
-        User user = userViewModel.getUser(arguments.getPersonName());
+        User user = userViewModel.getUser(arguments.getPersonName(), MainActivity.username);
 
         profileBitmapPath = user.profilePath;
 
@@ -98,7 +98,7 @@ public class FragmentEditProfile extends Fragment {
                     profileBitmapPath = uploaderHelper.uploadProfile
                             (nameFile, MainActivity.username, finalBitmap);
 
-                    userViewModel.update(username, profileBitmapPath); // updating database
+                    userViewModel.update(username, profileBitmapPath, MainActivity.username); // updating database
 
                     popBack(v);
                 });

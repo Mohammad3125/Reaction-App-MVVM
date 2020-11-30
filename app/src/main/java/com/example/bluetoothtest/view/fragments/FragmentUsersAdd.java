@@ -1,23 +1,15 @@
 package com.example.bluetoothtest.view.fragments;
 
-import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -33,16 +25,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bluetoothtest.view.activities.MainActivity;
 import com.example.bluetoothtest.R;
-import com.example.bluetoothtest.model.entities.users.User;
 import com.example.bluetoothtest.utility.PermissionUtility;
 import com.example.bluetoothtest.utility.ProfileHelper;
 import com.example.bluetoothtest.utility.WindowSetting;
 import com.example.bluetoothtest.view.RecyclerViewAdapter;
-import com.example.bluetoothtest.view.fragments.fragmentutility.DialogValidator;
 import com.example.bluetoothtest.view_model.UserViewModel;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.UUID;
@@ -161,13 +149,7 @@ public class FragmentUsersAdd extends Fragment {
 
         buttonFromCamera.setOnClickListener(view13 -> {
 
-            PermissionUtility permissionUtility = new PermissionUtility(getContext(), getActivity());
 
-            if (permissionUtility.checkForPermission(Manifest.permission.CAMERA))
-                startCameraIntent();
-            else
-                permissionUtility.
-                        requestPermission(Manifest.permission.CAMERA, PermissionUtility.CAMERA_REQUEST_CODE);
         });
 
 

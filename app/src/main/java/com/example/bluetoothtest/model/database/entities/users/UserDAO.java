@@ -1,4 +1,4 @@
-package com.example.bluetoothtest.model.entities.users;
+package com.example.bluetoothtest.model.database.entities.users;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -13,11 +13,11 @@ import java.util.List;
 public interface UserDAO {
 
 
-    @Query("SELECT EXISTS(SELECT * FROM users_table WHERE name = :user_name)")
-    Boolean doesUserExist(String user_name);
+    @Query("SELECT EXISTS(SELECT * FROM users_table WHERE name = :user_name AND parent = :parentName)")
+    Boolean doesUserExist(String user_name, String parentName);
 
-    @Query("SELECT * FROM users_table WHERE name = :username")
-    User getUser(String username);
+    @Query("SELECT * FROM users_table WHERE name = :username AND parent = :parentName")
+    User getUser(String username, String parentName);
 
     @Query("SELECT * FROM users_table WHERE parent =:parentName")
     LiveData<List<User>> getUsers(String parentName);

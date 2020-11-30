@@ -10,13 +10,12 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bluetoothtest.R;
-import com.example.bluetoothtest.model.entities.users.User;
+import com.example.bluetoothtest.model.database.entities.users.User;
 import com.example.bluetoothtest.utility.ProfileHelper;
 
 public class RecyclerViewAdapter extends ListAdapter<User, RecyclerViewAdapter.ViewHolder> {

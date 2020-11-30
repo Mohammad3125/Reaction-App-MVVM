@@ -26,8 +26,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.bluetoothtest.R;
-import com.example.bluetoothtest.model.entities.admins.Admin;
-import com.example.bluetoothtest.model.entities.users.User;
+import com.example.bluetoothtest.model.database.entities.admins.Admin;
+import com.example.bluetoothtest.model.database.entities.users.User;
 import com.example.bluetoothtest.utility.PermissionUtility;
 import com.example.bluetoothtest.utility.ProfileHelper;
 import com.example.bluetoothtest.utility.WindowSetting;
@@ -182,7 +182,7 @@ public class FragmentCreateUser extends Fragment implements View.OnClickListener
 
 
             boolean error = isAdmin ? adminViewModel.doesAdminExist(usernameText) :
-                    userViewModel.doesUserExists(usernameText);
+                    userViewModel.doesUserExists(usernameText, MainActivity.username);
 
 
             if (error) {
