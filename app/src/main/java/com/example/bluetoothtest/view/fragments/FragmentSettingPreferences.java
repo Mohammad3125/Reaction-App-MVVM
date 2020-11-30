@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -31,9 +32,10 @@ public class FragmentSettingPreferences extends PreferenceFragmentCompat {
                     getSharedPreferences(SplashScreen.SHARED_PREFERENCES_TAG, Context.MODE_PRIVATE).
                     edit().putBoolean(SplashScreen.LOGIN_STATE_KEY, false).apply();
 
-                    Intent loginPage = new Intent(getActivity(), LoginActivity.class);
-            startActivity(loginPage);
-            getActivity().finish();
+            Navigation.findNavController(getView())
+                    .navigate(FragmentSettingPreferencesDirections.
+                            actionFSettingPreferencesToLoginHost());
+
             return false;
         });
 

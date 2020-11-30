@@ -4,69 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:padding="10dp"
-    tools:context=".CreateAccountActivity">
+    android:animateLayoutChanges="true"
+    android:background="@drawable/ic_dragon_scales"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true"
+    tools:context=".view.fragments.FragmentLogin">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:clipToPadding="false"
+        android:padding="10dp">
+        <!-- We Can Ser Direction In Layout For Multiple Language Support -->
         <RelativeLayout
+            android:id="@+id/MainLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:clipToPadding="false">
 
             <TextView
-                android:id="@+id/text_view_creating_account"
+                android:id="@+id/textview_appname_loginpage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="25dp"
                 android:fontFamily="@font/shrink_hand"
-                android:text="CREATING ACCOUNT"
+                android:gravity="center"
+                android:text="BlazePod"
                 android:textColor="@color/colorAccentA"
                 android:textSize="24sp" />
 
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/create_account_user_profile_container"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_below="@+id/text_view_creating_account"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:clipToPadding="false"
-                app:cardCornerRadius="39dp">
-
-                <ImageView
-                    android:id="@+id/create_account_image_user_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <ImageView
-                android:id="@+id/create_account_button_from_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/create_account_user_profile_container"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_camera"
-                app:strokeColor="@color/colorAccentB" />
-
             <!-- For Edit Text -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/create_account_MainLayout_EditText_Name"
+                android:id="@+id/MainLayout_EditText_Name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_account_button_from_camera"
+                android:layout_below="@id/textview_appname_loginpage"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:elevation="15dp"
                 android:hint="USERNAME"
@@ -86,7 +65,7 @@
                 app:startIconTint="@color/colorAccentA">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/create_account_MaterialTextInputUsername"
+                    android:id="@+id/MaterialTextInputUsername"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/raleway_semibold"
@@ -98,11 +77,11 @@
             <!-- For Edit Text -->
             <com.google.android.material.textfield.TextInputLayout
 
-                android:id="@+id/create_account_MainLayout_EditText_Password"
+                android:id="@+id/MainLayout_EditText_Password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_account_MainLayout_EditText_Name"
+                android:layout_below="@id/MainLayout_EditText_Name"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:elevation="15dp"
@@ -127,7 +106,7 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/create_account_MaterialTextInputPassword"
+                    android:id="@+id/MaterialTextInputPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/raleway_semibold"
@@ -137,41 +116,68 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/create_account_button_create"
+                android:id="@+id/Button_Enter"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_account_MainLayout_EditText_Password"
+                android:layout_below="@id/MainLayout_EditText_Password"
                 android:layout_centerHorizontal="true"
-                android:elevation="12dp"
+                android:layout_marginEnd="-30dp"
+                android:elevation="20dp"
                 android:fontFamily="@font/raleway_semibold"
                 android:stateListAnimator="@null"
-                android:text="Create"
+                android:text="Login"
                 android:textColor="@color/colorAccentE"
                 android:textSize="17sp"
                 app:cornerRadius="15dp" />
 
-            <Button
-                android:id="@+id/create_account_button_cancel"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+
+            <!--android:background="@drawable/button_cancel_background"-->
+            <TextView
+                android:id="@+id/Text_DoesntHaveAcoount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_account_button_create"
+                android:layout_below="@id/Button_Enter"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="-30dp"
+                android:fontFamily="@font/raleway_regular"
+                android:gravity="center"
+                android:text="Don't Have an account ?"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/TextView_Create_Account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Text_DoesntHaveAcoount"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/raleway_semibold"
-                android:stateListAnimator="@null"
-                android:text="Cancel"
-                android:textColor="@color/colorAccentD"
-                android:textSize="17sp"
-                app:cornerRadius="15dp"
-                app:strokeColor="@color/colorAccentD"
-                app:strokeWidth="2dp" />
+                android:gravity="center"
+                android:text="Create An Account"
+                android:textColor="@color/colorAccentB" />
+
+            <TextView
+                android:id="@+id/TextView_StartAsGuest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/TextView_Create_Account"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:fontFamily="@font/raleway_semibold"
+                android:gravity="center"
+                android:text="Enter As Guest"
+                android:textColor="@color/colorAccent" />
+
+            <ImageView
+                android:id="@+id/image_view_animation"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_below="@id/TextView_StartAsGuest"
+                android:layout_centerHorizontal="true" />
 
 
         </RelativeLayout>
-
     </ScrollView>
-
 </RelativeLayout>

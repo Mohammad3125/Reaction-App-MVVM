@@ -53,7 +53,7 @@ public class FragmentUsersAdd extends Fragment {
     private static final int RESULT_OK = -1;
 
 
-    MaterialButton button;
+    MaterialButton buttonCreateUser;
     ImageView buttonFromCamera;
     ImageView userProfileImageView;
     View layoutDialog;
@@ -110,118 +110,126 @@ public class FragmentUsersAdd extends Fragment {
 
         userViewModel.getUsers(MainActivity.username).observe(getViewLifecycleOwner(), users -> adapter.submitList(users));
 
-        button.setOnClickListener(buttonView -> {
 
-            layoutDialog = LayoutInflater.from(getContext()).inflate(R.layout.custom_dialog_layout, container, false);
+        buttonCreateUser.setOnClickListener(view2 ->
+        {
+            Navigation.findNavController(view2).
+                    navigate(FragmentUsersAddDirections.actionFUserAddToFragmentCreateUser2(false));
+        });
 
-            AlertDialog dialog = new AlertDialog.Builder(context).setView(layoutDialog).create();
+        /*buttonCreateUser.setOnClickListener(buttonView -> {
 
-            dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        layoutDialog = LayoutInflater.from(getContext()).inflate(R.layout.custom_dialog_layout, container, false);
 
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        AlertDialog dialog = new AlertDialog.Builder(context).setView(layoutDialog).create();
 
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
-            dialog.show();
-
-
-            DisplayMetrics metric = new DisplayMetrics();
-
-            getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
-
-            int displayHeight = metric.heightPixels;
-            int displayWidth = metric.widthPixels;
-
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-            layoutParams.copyFrom(dialog.getWindow().getAttributes());
-
-            layoutParams.width = (int) (displayWidth * 0.75f);
-            layoutParams.height = (int) (displayHeight * 0.75f);
-
-            dialog.getWindow().setAttributes(layoutParams);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
-            dialog.getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-
-            dialog.getWindow().
-                    clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-
-            userProfileImageView = layoutDialog.findViewById(R.id.image_user_profile);
-
-            buttonFromCamera = layoutDialog.findViewById(R.id.button_from_camera);
-
-            buttonFromCamera.setOnClickListener(view13 -> {
-
-                PermissionUtility permissionUtility = new PermissionUtility(getContext(), getActivity());
-
-                if (permissionUtility.checkForPermission(Manifest.permission.CAMERA))
-                    startCameraIntent();
-                else
-                    permissionUtility.
-                            requestPermission(Manifest.permission.CAMERA, PermissionUtility.CAMERA_REQUEST_CODE);
-            });
+        dialog.show();
 
 
-            (layoutDialog.findViewById(R.id.dialog_button_cancel)).setOnClickListener(view1 -> {
-                ProfileHelper.delete(profileBitmapPath);
-                dialog.cancel();
-            });
+        DisplayMetrics metric = new DisplayMetrics();
+
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
+
+        int displayHeight = metric.heightPixels;
+        int displayWidth = metric.widthPixels;
+
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+        layoutParams.width = (int) (displayWidth * 0.75f);
+        layoutParams.height = (int) (displayHeight * 0.75f);
+
+        dialog.getWindow().setAttributes(layoutParams);
 
 
-            (layoutDialog.findViewById(R.id.dialog_button_createuser))
-                    .setOnClickListener(view12 -> {
-                        TextInputEditText editText = layoutDialog.findViewById(R.id.dialog_username_edittext);
-                        TextInputLayout layoutEditText = layoutDialog.findViewById(R.id.dialog_username_layout_edittext);
+        dialog.getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
-                        editText.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        dialog.getWindow().
+                clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
-                            }
+        userProfileImageView = layoutDialog.findViewById(R.id.image_user_profile);
 
-                            @Override
-                            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                                layoutEditText.setError(null);
-                            }
+        buttonFromCamera = layoutDialog.findViewById(R.id.button_from_camera);
 
-                            @Override
-                            public void afterTextChanged(Editable editable) {
+        buttonFromCamera.setOnClickListener(view13 -> {
 
-                            }
-                        });
+            PermissionUtility permissionUtility = new PermissionUtility(getContext(), getActivity());
 
-                        usernameText = editText.getText().toString().trim();
-                        if (!DialogValidator.isLengthValid(usernameText, 3, 24))
-                            layoutEditText.setError("Your Name Is Not Valid");
-
-                        else if (userViewModel.doesUserExists(usernameText))
-                            layoutEditText.setError("Another User With That Name Exist");
-
-                        else {
-
-                            ProfileHelper.delete(profileBitmapPath);
-
-                            profileBitmapPath = uploaderHelper.uploadProfile(nameFile, MainActivity.username, finalBitmap);
-
-                            userViewModel.insert(new User(usernameText, profileBitmapPath, MainActivity.username, 0));
-
-                            finalBitmap = null;
-
-                            dialog.cancel();
-
-                        }
-                    });
+            if (permissionUtility.checkForPermission(Manifest.permission.CAMERA))
+                startCameraIntent();
+            else
+                permissionUtility.
+                        requestPermission(Manifest.permission.CAMERA, PermissionUtility.CAMERA_REQUEST_CODE);
         });
 
 
+        (layoutDialog.findViewById(R.id.dialog_button_cancel)).setOnClickListener(view1 -> {
+            ProfileHelper.delete(profileBitmapPath);
+            dialog.cancel();
+        });
 
-        /* User item = listUsers.get(i);
 
-         */
+        (layoutDialog.findViewById(R.id.dialog_button_createuser))
+                .setOnClickListener(view12 -> {
+                    TextInputEditText editText = layoutDialog.findViewById(R.id.dialog_username_edittext);
+                    TextInputLayout layoutEditText = layoutDialog.findViewById(R.id.dialog_username_layout_edittext);
 
-    }
+                    editText.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            layoutEditText.setError(null);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+
+                        }
+                    });
+
+                    usernameText = editText.getText().toString().trim();
+                    if (!DialogValidator.isLengthValid(usernameText, 3, 24))
+                        layoutEditText.setError("Your Name Is Not Valid");
+
+                    else if (userViewModel.doesUserExists(usernameText))
+                        layoutEditText.setError("Another User With That Name Exist");
+
+                    else {
+
+                        ProfileHelper.delete(profileBitmapPath);
+
+                        profileBitmapPath = uploaderHelper.uploadProfile(nameFile, MainActivity.username, finalBitmap);
+
+                        userViewModel.insert(new User(usernameText, profileBitmapPath, MainActivity.username, 0));
+
+                        finalBitmap = null;
+
+                        dialog.cancel();
+
+                    }
+                });
+    });*/
+
+
+
+
+    /* User item = listUsers.get(i);
+
+     */
+
+}
 
     private void startCameraIntent() {
 
@@ -275,7 +283,7 @@ public class FragmentUsersAdd extends Fragment {
 
 
     private void initViews(View view) {
-        button = view.findViewById(R.id.Button_Add_Users);
+        buttonCreateUser = view.findViewById(R.id.Button_Add_Users);
         recyclerView = view.findViewById(R.id.recycler_view);
     }
 

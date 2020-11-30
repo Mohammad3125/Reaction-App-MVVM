@@ -12,13 +12,16 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/user_profile_image_view_list_view"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
         android:elevation="13dp"
         android:scaleType="centerCrop"
-        app:shapeAppearance="@style/circleImageView" />
+        app:shapeAppearance="@style/circleImageView"
+        app:strokeColor="@color/colorAccentA"
+        app:strokeWidth="1.5dp" />
 
 
     <View
@@ -38,7 +41,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@id/user_profile_image_view_list_view"
-        android:fontFamily="@font/raleway_regular_italic"
+        android:fontFamily="@font/raleway_regular"
+        android:textSize="15sp"
         android:text="Ashley Smith"
         android:textColor="@android:color/white" />
 

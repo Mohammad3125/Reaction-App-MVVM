@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/ic_slanted_gradient"
     tools:context=".view.activities.SplashScreen">
 
 
@@ -18,7 +18,9 @@
         android:text="Blazepod"
         android:textColor="@color/colorAccent"
         android:textSize="50sp"
-        android:layout_centerInParent="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="270dp"
+         />
 
     <TextView
         android:id="@+id/TextViewMoreansStudio"
@@ -42,7 +44,7 @@
         android:fontFamily="@font/raleway_bold"
         android:gravity="center"
         android:text="From Facebook"
-        android:textColor="@color/colorAccentC"
+        android:textColor="@color/colorAccentB"
         android:textSize="24sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>

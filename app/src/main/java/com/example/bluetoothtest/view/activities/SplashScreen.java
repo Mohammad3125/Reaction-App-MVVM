@@ -42,10 +42,10 @@ public class SplashScreen extends AppCompatActivity {
             Class<?> myClass = MainActivity.class;
 
             if (!sharedPreferences.getBoolean(LOGIN_STATE_KEY, false))
-                myClass = LoginActivity.class;
+                myClass = LoginHost.class;
 
             String name = sharedPreferences.getString(MainActivity.userTag, "default-user");
-            startActivity(new Intent(this, myClass).putExtra("UserName", name));
+            startActivity(new Intent(this, myClass).putExtra("username", name));
 
             finish();
         }, TIME_SPLASH_SCREEN * 1000);

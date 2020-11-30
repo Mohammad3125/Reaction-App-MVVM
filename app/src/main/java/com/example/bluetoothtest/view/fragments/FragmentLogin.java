@@ -1,32 +1,37 @@
-package com.example.bluetoothtest.view.activities;
+package com.example.bluetoothtest.view.fragments;
 
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
 import com.example.bluetoothtest.R;
-import com.example.bluetoothtest.view.fragments.fragmentutility.DialogValidator;
 import com.example.bluetoothtest.utility.WindowSetting;
+import com.example.bluetoothtest.view.activities.MainActivity;
+import com.example.bluetoothtest.view.activities.SplashScreen;
+import com.example.bluetoothtest.view.fragments.fragmentutility.DialogValidator;
 import com.example.bluetoothtest.view_model.AdminViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class LoginActivity extends AppCompatActivity {
+public class FragmentLogin extends Fragment {
     private static final int MINIMUM_LENGTH_TEXT = 3;
     private static final int MAXIMUM_LENGTH_TEXT = 24;
 
@@ -42,40 +47,36 @@ public class LoginActivity extends AppCompatActivity {
 
     AdminViewModel adminViewModel;
 
+    Context context;
 
     WindowSetting windowSetting;
-    // Finals
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_login);
+    public void onStart() {
+        super.onStart();
+
+        adminViewModel = new ViewModelProvider(requireActivity()).get(AdminViewModel.class);
+
+        windowSetting = new WindowSetting(getActivity().getWindow());
+
+        windowSetting.hideStatusBar().setTransitionOverlap(true);
 
 
-        initViews();
-
-        adminViewModel = new ViewModelProvider(this).get(AdminViewModel.class);
-
-        windowSetting = new WindowSetting(getWindow());
-        windowSetting.windowsFullScreen().hideStatusBar().setTransitionOverlap(true);
-
-        // ViewCompat.setTransitionName(imageApp, IMAGE_VIEW_PAIR_ID);
-        // ViewCompat.setTransitionName(appName, TEXT_VIEW_PAIR_ID);
-
-
-        //In order to navigation from activity to fragment in another Activity beside
-        // MainActivity which hosts navController we should make a graph independently for this activity
         createAnAccountText.setOnClickListener(view -> {
-          //  Navigation.findNavController(view)
-                 //   .navigate(MainActivityDirections.actionMainActivityToLoginHost());
+            // Going To The Creating Account Fragment
+            Navigation.findNavController(view).navigate(FragmentLoginDirections.
+                    actionFragmentLoginToFragmentCreateUser(true));
+            // false argument is defining that we're creating user or admin
         });
 
         enterButton.setOnClickListener(view -> {
-            view.startAnimation(AnimationUtils.loadAnimation(LoginActivity.this, R.anim.button_animation));
+            view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.button_animation));
 
 
             String nameText = textInputUsername.getText().toString().trim();
             String passText = textInputPassword.getText().toString().trim();
+
+            boolean Proceed = true;
 
             if (!DialogValidator.isLengthValid(nameText, MINIMUM_LENGTH_TEXT, MAXIMUM_LENGTH_TEXT)) {
                 DialogValidator.setError("Your Name Is Not Valid", layoutInputTextName);
@@ -86,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                 DialogValidator.setError("Your Password Is Not Valid", layoutInputTextPassword);
                 return;
             }
+
 
             if (!adminViewModel.doesAdminExist(nameText, passText)) {
                 DialogValidator.setError("The Username Doesn't Exist ", layoutInputTextName);
@@ -102,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
             dialog.findViewById(R.id.image_view_check_drawable).startAnimation
                     (AnimationUtils.loadAnimation(dialog.getContext(), R.anim.anim_rotate));
 
-            SharedPreferences sharedPreferences = getSharedPreferences(SplashScreen.SHARED_PREFERENCES_TAG, MODE_PRIVATE);
+            SharedPreferences sharedPreferences = context.getSharedPreferences(SplashScreen.SHARED_PREFERENCES_TAG, Context.MODE_PRIVATE);
 
 
             sharedPreferences.edit().putString(MainActivity.userTag, nameText).apply();
@@ -111,13 +113,14 @@ public class LoginActivity extends AppCompatActivity {
             sharedPreferences.edit().putBoolean(SplashScreen.LOGIN_STATE_KEY, true).apply();
 
 
-            new Handler(getMainLooper()).postDelayed(() -> {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class).
-                        putExtra("UserName", nameText));
-                finish();
+            new Handler(getActivity().getMainLooper()).postDelayed(() -> {
+                //Intent StartApp = new Intent(context, MainActivity.class);
+                //StartApp.putExtra("UserName", nameText);
+                //startActivity(StartApp);
+                Navigation.findNavController(view).
+                        navigate(FragmentLoginDirections.actionFragmentLoginToMainActivity22(nameText));
+
             }, 1000);
-
-
         });
 
 
@@ -125,9 +128,17 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void clearTextInputs() {
-        textInputUsername.setText("");
-        textInputPassword.setText("");
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        initViews(view);
+
+        context = getContext();
+
+        return view;
+
     }
 
 
@@ -166,33 +177,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-    private void initViews() {
-        layoutInputTextName = findViewById(R.id.MainLayout_EditText_Name);
-        layoutInputTextPassword = findViewById(R.id.MainLayout_EditText_Password);
-        textInputPassword = findViewById(R.id.MaterialTextInputPassword);
-        textInputUsername = findViewById(R.id.MaterialTextInputUsername);
-        appName = findViewById(R.id.textview_appname_loginpage);
-        enterButton = findViewById(R.id.Button_Enter);
-        enterAsGuestText = findViewById(R.id.TextView_StartAsGuest);
-        createAnAccountText = findViewById(R.id.TextView_Create_Account);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        textInputUsername.setText("");
-        textInputPassword.setText("");
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        windowSetting.onSystemUiVisibilityChange(newConfig.orientation);
+    private void initViews(View view) {
+        layoutInputTextName = view.findViewById(R.id.MainLayout_EditText_Name);
+        layoutInputTextPassword = view.findViewById(R.id.MainLayout_EditText_Password);
+        textInputPassword = view.findViewById(R.id.MaterialTextInputPassword);
+        textInputUsername = view.findViewById(R.id.MaterialTextInputUsername);
+        appName = view.findViewById(R.id.textview_appname_loginpage);
+        enterButton = view.findViewById(R.id.Button_Enter);
+        enterAsGuestText = view.findViewById(R.id.TextView_StartAsGuest);
+        createAnAccountText = view.findViewById(R.id.TextView_Create_Account);
     }
 }

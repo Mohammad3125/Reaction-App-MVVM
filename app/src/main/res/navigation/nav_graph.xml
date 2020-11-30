@@ -21,6 +21,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_fUserAdd_to_fragmentCreateUser2"
+            app:destination="@id/fragmentCreateUser2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/fUserInformation"
@@ -46,7 +53,11 @@
     <fragment
         android:id="@+id/fSettingPreferences"
         android:name="com.example.bluetoothtest.view.fragments.FragmentSettingPreferences"
-        android:label="FragmentSettingPreferences" />
+        android:label="FragmentSettingPreferences" >
+        <action
+            android:id="@+id/action_fSettingPreferences_to_loginHost"
+            app:destination="@id/loginHost" />
+    </fragment>
     <fragment
         android:id="@+id/fEditProfile"
         android:name="com.example.bluetoothtest.view.fragments.FragmentEditProfile"
@@ -54,5 +65,18 @@
         <argument
             android:name="personName"
             app:argType="string" />
+    </fragment>
+    <activity
+        android:id="@+id/loginHost"
+        android:name="com.example.bluetoothtest.view.activities.LoginHost"
+        android:label="LoginHost" />
+    <fragment
+        android:id="@+id/fragmentCreateUser2"
+        android:name="com.example.bluetoothtest.view.fragments.FragmentCreateUser"
+        android:label="fragment_create_user"
+        tools:layout="@layout/fragment_create_user" >
+        <argument
+            android:name="isAdmin"
+            app:argType="boolean" />
     </fragment>
 </navigation>

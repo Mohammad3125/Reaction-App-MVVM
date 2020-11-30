@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null)
-            username = bundle.getString("UserName");
+            username = MainActivityArgs.fromBundle(bundle).getUsername();
 
 
           /*  if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE))
@@ -156,7 +156,9 @@ public class MainActivity extends AppCompatActivity {
             WelcomeDialog.show();*/
 
         //Navigation container which contains different elements of navigating
-        NavHostFragment navContainer = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_container);
+        NavHostFragment navContainer =
+                (NavHostFragment) getSupportFragmentManager().
+                        findFragmentById(R.id.nav_container);
 
 
         //Navigation controller , Controls navigation and destinations
@@ -182,8 +184,6 @@ public class MainActivity extends AppCompatActivity {
                 bottomNavigationShadow.setVisibility(View.VISIBLE);
             }
         });
-
-
 
 
     }

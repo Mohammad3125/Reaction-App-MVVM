@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/edit_profile_button_cancel"
             app:shapeAppearance="@style/circleImageView"
             app:strokeColor="@color/colorAccent"
-            app:strokeWidth="1dp" />
+            app:strokeWidth="3dp" />
 
 
 
