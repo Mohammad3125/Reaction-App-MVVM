@@ -151,26 +151,7 @@ public class ProfileHelper {
     }
 
     public static void getDefaultImage(ImageView imageView) {
-        //Picasso.get().load(new File(defaultProfilePath)).into(imageView);
-
-
-       /* imageView.setBackgroundColor(Color.rgb(128, 96, 77)); // Brown
-        TextView textView = new TextView(context);
-
-        //Making TextView Programmatically
-        textView.setText(String.valueOf(firstLetter));
-        textView.setTextSize(24);
-        textView.setTextColor(Color.WHITE);
-        FrameLayout.LayoutParams layoutParams =
-                new FrameLayout.LayoutParams(
-                        new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER));
-
-
-        textView.setLayoutParams(layoutParams);
-        //Adding It To Profile Container
-        view.addView(textView);*/
-
+        imageView.setImageDrawable(ContextCompat.getDrawable(imageView.getContext(), R.drawable.ic_default_user));
     }
 
     public static void delete(String path) {

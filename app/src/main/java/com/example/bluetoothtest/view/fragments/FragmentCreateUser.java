@@ -114,6 +114,8 @@ public class FragmentCreateUser extends Fragment implements View.OnClickListener
 
         context = getContext();
 
+        ProfileHelper.getDefaultImage(userProfileImageView);
+
         return view;
     }
 
@@ -134,6 +136,11 @@ public class FragmentCreateUser extends Fragment implements View.OnClickListener
         if (!isAdmin) {
             passwordLayout.setVisibility(View.INVISIBLE);
             passwordTextInput.setVisibility(View.INVISIBLE);
+
+            //Moving button up a little bit
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) createButton.getLayoutParams();
+            params.setMargins(0, -50, 0, 0);
+
         }
 
     }

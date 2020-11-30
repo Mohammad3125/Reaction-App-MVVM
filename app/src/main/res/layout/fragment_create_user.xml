@@ -15,12 +15,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="top">
 
             <TextView
                 android:id="@+id/text_view_creating_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/shrink_hand"
                 android:text="CREATING ACCOUNT"
@@ -28,30 +29,23 @@
                 android:textSize="24sp" />
 
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/create_account_user_profile_container"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/create_account_image_user_profile"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_below="@+id/text_view_creating_account"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:clipToPadding="false"
-                app:cardCornerRadius="39dp">
-
-                <ImageView
-                    android:id="@+id/create_account_image_user_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
-
-            </com.google.android.material.card.MaterialCardView>
+                app:shapeAppearance="@style/circleImageView"
+                app:strokeColor="@color/colorAccentA"
+                app:strokeWidth="1.5dp" />
 
 
             <ImageView
                 android:id="@+id/create_account_button_from_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/create_account_user_profile_container"
+                android:layout_below="@+id/create_account_image_user_profile"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"
                 android:src="@drawable/ic_camera"
