@@ -13,6 +13,7 @@ public class PermissionUtility {
 
     public static final int CAMERA_REQUEST_CODE = 1;
     public static final int BLUETOOTH_REQUEST_CODE = 2;
+    public static final int LOCATION_REQUEST_CODE = 3;
 
     public static final int BUILD_VERSION = Build.VERSION.SDK_INT;
 

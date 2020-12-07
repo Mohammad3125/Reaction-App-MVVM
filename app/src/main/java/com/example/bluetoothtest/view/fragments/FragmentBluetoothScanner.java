@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,38 +55,6 @@ public class FragmentBluetoothScanner extends Fragment {
 
         permissionUtility = new PermissionUtility(context, requireActivity());
 
-        if (!checkForBluetoothAndLocationPermission()) {
-            AlertDialog dialogError = new AlertDialog.Builder(context).
-                    setView(R.layout.layout_dialog_bluetooth_adapter_not_enabled).
-                    create();
-
-            dialogError.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-            DisplayMetrics metric = new DisplayMetrics();
-
-            requireActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
-
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-            layoutParams.copyFrom(dialogError.getWindow().getAttributes());
-
-            layoutParams.width = (int) (metric.widthPixels * 0.75f);
-            layoutParams.height = (int) (metric.heightPixels * 1f);
-
-            dialogError.getWindow().setAttributes(layoutParams);
-
-            dialogError.show();
-
-            dialogError.findViewById(R.id.button_cancel_dialog_permission).
-                    setOnClickListener(v -> dialogError.cancel());
-
-        } else {
-            if (bluetoothViewModel == null)
-                bluetoothViewModel = new ViewModelProvider(requireActivity()).get(BluetoothViewModel.class);
-
-            bluetoothViewModel.getDevices().
-                    observe(getViewLifecycleOwner(), devices -> recyclerViewNearbyAdapter.submitList(devices));
-        }
-
         recyclerViewNearbyAdapter.setOnDeviceItemClickListener(device -> {
             //onDeviceClicked
         });
@@ -112,6 +81,55 @@ public class FragmentBluetoothScanner extends Fragment {
         recyclerViewNearbyDevices.setHasFixedSize(true);
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+        if (!checkForBluetoothAndLocationPermission()) {
+
+
+            AlertDialog dialogError = new AlertDialog.Builder(context).
+                    setView(R.layout.layout_dialog_bluetooth_adapter_not_enabled).
+                    create();
+
+            dialogError.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            DisplayMetrics metric = new DisplayMetrics();
+
+            requireActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
+
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            layoutParams.copyFrom(dialogError.getWindow().getAttributes());
+
+            layoutParams.width = (int) (metric.widthPixels * 0.75f);
+            layoutParams.height = (int) (metric.heightPixels * 1f);
+
+            dialogError.getWindow().setAttributes(layoutParams);
+
+            dialogError.show();
+
+            dialogError.findViewById(R.id.button_cancel_dialog_permission).
+                    setOnClickListener(v -> dialogError.cancel());
+
+
+            dialogError.findViewById(R.id.button_give_permission_dialog_permission)
+                    //getView here has to be called, because dialog's view doesn't have NavController
+                    .setOnClickListener(v2 -> {
+                        Navigation.findNavController(getView()).
+                                navigate(FragmentBluetoothScannerDirections.actionFragmentBluetoothScannerToFragmentGetPermission());
+                        dialogError.cancel();
+                    });
+
+        } else {
+            if (bluetoothViewModel == null)
+                bluetoothViewModel = new ViewModelProvider(requireActivity()).get(BluetoothViewModel.class);
+
+            bluetoothViewModel.getDevices().
+                    observe(getViewLifecycleOwner(), devices -> recyclerViewNearbyAdapter.submitList(devices));
+        }
     }
 
     @Override

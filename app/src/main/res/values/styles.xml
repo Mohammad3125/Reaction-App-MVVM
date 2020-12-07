@@ -52,6 +52,7 @@
         <item name="android:textColor">@color/colorAccentB</item>
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="backgroundColor">@color/colorBackgroundDarker</item>
+        <!-- <item name="fontFamily">@font/raleway_semibold</item> -->
     </style>
 
     <style name="circleImageView" parent="">

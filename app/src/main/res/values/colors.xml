@@ -18,6 +18,10 @@
     <color name="colorAccentG">#003930</color>
     <color name="colorAccentH">#003229</color>
     <color name="TRANSPARENT">#00111111</color>
+    <color name="blue200">#40C4FF</color>
+    <color name="blue400">#00B0FF</color>
+    <color name="blue800">#0091EA</color>
+    <color name="blue900">#0277BD</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>

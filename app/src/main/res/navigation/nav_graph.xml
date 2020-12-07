@@ -8,7 +8,15 @@
         android:id="@+id/fMainPage"
         android:name="com.example.bluetoothtest.view.fragments.FragmentMainPage"
         android:label="fragment_mainpage"
-        tools:layout="@layout/fragment_mainpage" />
+        tools:layout="@layout/fragment_mainpage" >
+        <action
+            android:id="@+id/action_fMainPage_to_fragmentGetPermission"
+            app:destination="@id/fragmentGetPermission"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/fUserAdd"
         android:name="com.example.bluetoothtest.view.fragments.FragmentUsersAdd"
@@ -47,10 +55,6 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/fBluetoothScanner"
-        android:name="com.example.bluetoothtest.view.fragments.FragmentBluetoothScanner"
-        android:label="FragmentBluetoothScanner" />
-    <fragment
         android:id="@+id/fSettingPreferences"
         android:name="com.example.bluetoothtest.view.fragments.FragmentSettingPreferences"
         android:label="FragmentSettingPreferences" >
@@ -78,5 +82,23 @@
         <argument
             android:name="isAdmin"
             app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentGetPermission"
+        android:name="com.example.bluetoothtest.view.fragments.FragmentGetPermission"
+        android:label="fragment_ask_permision"
+        tools:layout="@layout/fragment_ask_permision" />
+    <fragment
+        android:id="@+id/fBluetoothScanner"
+        android:name="com.example.bluetoothtest.view.fragments.FragmentBluetoothScanner"
+        android:label="fragment_bluetooth_scan"
+        tools:layout="@layout/fragment_bluetooth_scan" >
+        <action
+            android:id="@+id/action_fragmentBluetoothScanner_to_fragmentGetPermission"
+            app:destination="@id/fragmentGetPermission"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>
