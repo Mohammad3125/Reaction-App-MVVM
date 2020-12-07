@@ -1,95 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackgroundDarker"
-    android:clipToPadding="false"
-    android:padding="20dp">
+    android:clipToPadding="false">
 
-    <ScrollView
-        android:id="@+id/Layout_Scroll"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbarSize="8.5dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/TextView_Connected_Device"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="10dp"
-            android:text="Connected Devices"
-            android:textColor="@color/colorAccent"
-            android:textSize="19.5sp"
-            android:textStyle="normal"
-            android:translationY="800dp" />
-
-        <ListView
-            android:id="@+id/Added_Devices_ListView"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_connected_devices"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/TextView_Connected_Device"
-            android:background="@drawable/background_layout"
-            android:divider="@color/colorAccentB"
-            android:dividerHeight="3dp"
-            android:elevation="20dp"
-            android:outlineProvider="background"
-            android:padding="10dp"
-            android:translationY="800dp" />
-
-
-        <Button
-            android:id="@+id/Button_Scan"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:cornerRadius="12dp"
-            app:strokeColor="@color/colorAccentA"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_below="@id/Added_Devices_ListView"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/button_background"
-            android:elevation="10dp"
-            android:gravity="center"
-            android:outlineProvider="background"
-            android:stateListAnimator="@null"
-            android:text="Scan"
-            android:textAlignment="center"
-            android:textColor="@color/colorBackgroundDark"
-            android:translationY="800dp" />
-
-        <TextView
-            android:id="@+id/TextViewAddedDevice"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Added_Devices_ListView"
-            android:layout_alignParentStart="true"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:divider="@color/colorAccentB"
-            android:dividerHeight="3dp"
-            android:text="Scanned Device"
-            android:textColor="@color/colorAccent"
-            android:textSize="19.5sp"
-            android:textStyle="normal"
-            android:translationY="800dp" />
+            android:layout_marginEnd="30dp"
+            app:cardBackgroundColor="@color/colorBackgroundDarkest"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="12dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
-        <ListView
-            android:id="@+id/Found_Devices_ListView"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Connected Devices"
+                android:textColor="@color/colorAccentA"
+                android:textSize="18sp" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_connected_devices"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_below="@id/Button_Scan"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/background_layout"
-            android:divider="@color/colorBackgroundDark"
-            android:dividerHeight="10dp"
-            android:elevation="20dp"
-            android:outlineProvider="background"
-            android:padding="10dp"
-            android:translationY="800dp" />
-    </ScrollView>
-</RelativeLayout>
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_connected_devices"
+            tools:listitem="@layout/bluetooth_listitem_view" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_nearby_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            app:cardBackgroundColor="@color/colorBackgroundDarkest"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_connected_devices">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Nearby devices"
+                android:textColor="@color/colorAccentA"
+                android:textSize="18sp" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_nearby_devices"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_nearby_device"
+            tools:listitem="@layout/bluetooth_listitem_view" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

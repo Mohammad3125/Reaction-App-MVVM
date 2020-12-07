@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background_dialog"
     android:padding="5dp"
     android:layout_margin="10dp"
@@ -11,75 +12,97 @@
     android:layout_height="60dp">
 
     <ImageView
+        android:id="@+id/Icon_Device_ID"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:id="@+id/Icon_Device_ID"
-        android:src="@drawable/device"
-        android:tint="@color/colorAccent"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"/>
-    <View
-        android:layout_width="2dp"
-        android:id="@+id/View_Line"
-        android:alpha="0.4"
-        android:layout_height="40dp"
-        android:layout_toEndOf="@id/Icon_Device_ID"
-        android:background="@color/colorAccentD"
-        android:layout_marginStart="5dp"
-        android:layout_centerVertical="true"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_toEndOf="@id/View_Line"
         android:layout_centerVertical="true"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:orientation="vertical">
-    <TextView
+        android:src="@drawable/device"
+        app:tint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/View_Line"
+        android:layout_width="2dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@id/Icon_Device_ID"
+        android:alpha="0.4"
+        android:background="@color/colorAccentD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Icon_Device_ID"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/TextView_Device_Name"
-        android:text="Pod 293"
-        android:textColor="@color/colorAccentB"
-        android:textStyle="bold"
-        android:textSize="14sp"/>
+        android:layout_centerVertical="true"
+        android:layout_marginStart="7dp"
+        android:layout_toEndOf="@id/View_Line"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/View_Line"
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
+            android:id="@+id/TextView_Device_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/TextVIew_Device_Address"
+            android:text="Pod 293"
             android:textColor="@color/colorAccentB"
-            android:textStyle="bold"
-            android:text="8c:12:57:f3:12:43"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TextVIew_Device_Address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textSize="10sp"/>
+            android:text="8c:12:57:f3:12:43"
+            android:textColor="@color/colorAccentB"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/Signal_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/Button_Connect_ListView"
-        android:id="@+id/Signal_TextView"
+        android:layout_centerVertical="true"
         android:layout_marginEnd="10dp"
         android:text="-25dB"
         android:textColor="@color/colorAccentB"
-        android:textStyle="bold"
         android:textSize="12sp"
-        android:layout_centerVertical="true"/>
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Button_Connect_ListView"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
+        android:id="@+id/Button_Connect_ListView"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        app:cornerRadius="12dp"
-        app:strokeColor="@color/colorAccentA"
-        android:id="@+id/Button_Connect_ListView"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:text="Connect"
         android:textSize="13sp"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="5dp"
-        android:layout_alignParentEnd="true"/>
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/colorAccentA" />
 
 
 
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

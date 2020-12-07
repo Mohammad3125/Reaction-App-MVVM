@@ -24,11 +24,6 @@ import java.util.List;
 public class FragmentBluetoothScanner extends Fragment {
 
     private static final String TAG = "FragmentBluetoothScan";
-    ListView ScannedDeviceListView, ConnectedDeviceListView;
-    TextView ConnectedDeviceTextView, FoundedDevicesTextView;
-    Button ScanButton;
-
-    List<ScanResult> scanResultList;
 
 
     @Nullable
@@ -36,44 +31,18 @@ public class FragmentBluetoothScanner extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_bluetooth_scan, container, false);
 
-
         InitViews(fragmentView);
 
-        startAnimateViews();
 
-        scanResultList = new ArrayList<>();
 
-        ScanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-
-            public void onClick(View view) {
-                view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.button_animation));
-
-                Toast.makeText(getContext(), "Starting Scan", Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
 
         return fragmentView;
 
     }
 
-    private void startAnimateViews() {
-        ConnectedDeviceTextView.animate().translationY(1f).setDuration(360);
-        ConnectedDeviceListView.animate().translationY(1f).setDuration(370);
-        ScanButton.animate().translationY(1f).setDuration(380);
-        ScannedDeviceListView.animate().translationY(1f).setDuration(390);
-        FoundedDevicesTextView.animate().translationY(1f).setDuration(400);
-
-    }
-
     private void InitViews(View fragmentView) {
-        ScannedDeviceListView = fragmentView.findViewById(R.id.Found_Devices_ListView);
-        ConnectedDeviceListView = fragmentView.findViewById(R.id.Added_Devices_ListView);
-        ConnectedDeviceTextView = fragmentView.findViewById(R.id.TextView_Connected_Device);
-        FoundedDevicesTextView = fragmentView.findViewById(R.id.TextViewAddedDevice);
-        ScanButton = fragmentView.findViewById(R.id.Button_Scan);
+
     }
 
 
