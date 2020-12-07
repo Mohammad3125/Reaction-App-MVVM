@@ -85,6 +85,7 @@ public class FragmentUsersAdd extends Fragment {
 
         configRecyclerView(context);
 
+
         adapter.setRemoveListener(user -> userViewModel.delete(user));
 
         adapter.setItemListener((position, username) -> {
@@ -100,10 +101,8 @@ public class FragmentUsersAdd extends Fragment {
 
 
         buttonCreateUser.setOnClickListener(view2 ->
-        {
-            Navigation.findNavController(view2).
-                    navigate(FragmentUsersAddDirections.actionFUserAddToFragmentCreateUser2(false));
-        });
+                Navigation.findNavController(view2).
+                        navigate(FragmentUsersAddDirections.actionFUserAddToFragmentCreateUser2(false)));
 
         /*buttonCreateUser.setOnClickListener(buttonView -> {
 
@@ -230,9 +229,9 @@ public class FragmentUsersAdd extends Fragment {
     public void onStart() {
         super.onStart();
         uploaderHelper =
-                new ProfileHelper(context, getActivity().getContentResolver());
+                new ProfileHelper(context, requireActivity().getContentResolver());
 
-        windowSetting = new WindowSetting(getActivity().getWindow()).
+        windowSetting = new WindowSetting(requireActivity().getWindow()).
                 setStatusBarColor(ContextCompat.getColor(context, R.color.colorAccentH));
 
     }

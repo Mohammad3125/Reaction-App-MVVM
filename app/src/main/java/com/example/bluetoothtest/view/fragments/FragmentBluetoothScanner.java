@@ -1,30 +1,56 @@
 package com.example.bluetoothtest.view.fragments;
 
-import android.bluetooth.le.ScanResult;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bluetoothtest.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.bluetoothtest.utility.ProfileHelper;
+import com.example.bluetoothtest.utility.WindowSetting;
+import com.example.bluetoothtest.view.RecyclerViewScanner;
+import com.example.bluetoothtest.view_model.BluetoothViewModel;
 
 
 public class FragmentBluetoothScanner extends Fragment {
 
     private static final String TAG = "FragmentBluetoothScan";
 
+
+    RecyclerView recyclerViewNearbyDevices;
+    RecyclerViewScanner recyclerViewNearbyAdapter;
+    WindowSetting windowSetting;
+    Context context;
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        recyclerViewNearbyAdapter = new RecyclerViewScanner(new RecyclerViewScanner.wordDiff());
+
+        recyclerViewNearbyDevices.setAdapter(recyclerViewNearbyAdapter);
+
+        BluetoothViewModel bluetoothViewModel = new ViewModelProvider(requireActivity()).get(BluetoothViewModel.class);
+
+        bluetoothViewModel.getDevices().
+                observe(getViewLifecycleOwner(), devices -> recyclerViewNearbyAdapter.submitList(devices));
+
+
+        recyclerViewNearbyAdapter.setOnDeviceItemClickListener(device -> {
+            //onDeviceClicked
+        });
+    }
 
     @Nullable
     @Override
@@ -33,17 +59,30 @@ public class FragmentBluetoothScanner extends Fragment {
 
         InitViews(fragmentView);
 
-
-
-
+        context = fragmentView.getContext();
 
         return fragmentView;
 
     }
 
     private void InitViews(View fragmentView) {
+        recyclerViewNearbyDevices = fragmentView.findViewById(R.id.recycler_view_nearby_devices);
+
+        recyclerViewNearbyDevices.setLayoutManager(new LinearLayoutManager(context));
+
+        recyclerViewNearbyDevices.setHasFixedSize(true);
+
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        windowSetting = new WindowSetting(requireActivity().getWindow()).
+                setStatusBarColor(ContextCompat.getColor(context, R.color.colorBackgroundDarker));
+
+    }
+
 
 
   /* private void StartScan() {

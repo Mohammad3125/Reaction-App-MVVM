@@ -35,10 +35,10 @@ public class ListViewCustomAdapter extends ArrayAdapter<ScanResult> {
 
             TextView DeviceName, DeviceAddress, SignalTextView;
             Button Connect;
-            DeviceName = convertView.findViewById(R.id.TextView_Device_Name);
-            SignalTextView = convertView.findViewById(R.id.Signal_TextView);
-            DeviceAddress = convertView.findViewById(R.id.TextVIew_Device_Address);
-            Connect = convertView.findViewById(R.id.Button_Connect_ListView);
+            DeviceName = convertView.findViewById(R.id.text_view_device_name);
+            SignalTextView = convertView.findViewById(R.id.text_view_signal_power);
+            DeviceAddress = convertView.findViewById(R.id.text_view_device_address);
+            Connect = convertView.findViewById(R.id.button_connect_to_device);
 
             Connect.setOnClickListener(new View.OnClickListener() {
                 @Override

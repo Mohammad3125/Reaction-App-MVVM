@@ -12,7 +12,7 @@
     android:layout_height="60dp">
 
     <ImageView
-        android:id="@+id/Icon_Device_ID"
+        android:id="@+id/icon_device"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_alignParentStart="true"
@@ -24,16 +24,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/View_Line"
+        android:id="@+id/line_after_device_picture"
         android:layout_width="2dp"
         android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="5dp"
-        android:layout_toEndOf="@id/Icon_Device_ID"
+        android:layout_toEndOf="@id/icon_device"
         android:alpha="0.4"
         android:background="@color/colorAccentD"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Icon_Device_ID"
+        app:layout_constraintStart_toEndOf="@+id/icon_device"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
@@ -42,14 +42,14 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginStart="7dp"
-        android:layout_toEndOf="@id/View_Line"
+        android:layout_toEndOf="@id/line_after_device_picture"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/View_Line"
+        app:layout_constraintStart_toEndOf="@+id/line_after_device_picture"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/TextView_Device_Name"
+            android:id="@+id/text_view_device_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pod 293"
@@ -58,7 +58,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/TextVIew_Device_Address"
+            android:id="@+id/text_view_device_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -70,7 +70,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/Signal_TextView"
+        android:id="@+id/text_view_signal_power"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -80,11 +80,11 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Button_Connect_ListView"
+        app:layout_constraintEnd_toStartOf="@+id/button_connect_to_device"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Button_Connect_ListView"
+        android:id="@+id/button_connect_to_device"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -56,10 +57,12 @@ public class FragmentEditProfile extends Fragment {
     public void onStart() {
         super.onStart();
 
-        windowSetting = new WindowSetting(getActivity().getWindow());
+        FragmentActivity fragmentActivity = requireActivity();
+
+        windowSetting = new WindowSetting(fragmentActivity.getWindow());
         windowSetting.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.colorAccentG));
 
-        uploaderHelper = new ProfileHelper(getContext(), getActivity().getContentResolver());
+        uploaderHelper = new ProfileHelper(getContext(), fragmentActivity.getContentResolver());
 
     }
 
