@@ -10,6 +10,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.bluetoothtest.repository.BluetoothRepository;
@@ -22,6 +23,8 @@ public class BluetoothViewModel extends AndroidViewModel {
     BluetoothAdapter adapter;
     BluetoothLeScanner scanner;
     BluetoothRepository repository;
+
+    MutableLiveData<List<BluetoothDevice>> devices;
 
     public BluetoothViewModel(@NonNull Application application) {
         super(application);
@@ -39,6 +42,11 @@ public class BluetoothViewModel extends AndroidViewModel {
 
 
     public LiveData<List<BluetoothDevice>> getDevices() {
-        return repository.getDevices(scanner);
+        if (devices == null)
+            devices = new MutableLiveData<>();
+
+        devices.setValue(repository.getDevices(scanner));
+
+        return devices;
     }
 }

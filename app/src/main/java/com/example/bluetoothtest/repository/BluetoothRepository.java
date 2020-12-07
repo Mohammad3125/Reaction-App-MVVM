@@ -17,8 +17,12 @@ public class BluetoothRepository {
 
     }
 
-    public LiveData<List<BluetoothDevice>> getDevices(BluetoothLeScanner scanner) {
-        return new BluetoothScanner().getDevices(scanner);
+    public List<BluetoothDevice> getDevices(BluetoothLeScanner scanner) {
+        return new BluetoothScanner(scanner).getDevices();
+    }
+
+    public void insertIntoAddedDevices(BluetoothDevice bluetoothDevice) {
+
     }
 
 }
