@@ -33,6 +33,8 @@ public class BluetoothViewModel extends AndroidViewModel {
 
         adapter = manager.getAdapter();
 
+        adapter.enable();
+
         scanner = adapter.getBluetoothLeScanner();
 
         repository = new BluetoothRepository(application);
@@ -48,5 +50,9 @@ public class BluetoothViewModel extends AndroidViewModel {
         devices.setValue(repository.getDevices(scanner));
 
         return devices;
+    }
+
+    public boolean isAdaptorEnables() {
+        return adapter.isEnabled() && adapter != null;
     }
 }

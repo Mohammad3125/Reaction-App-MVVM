@@ -1,10 +1,16 @@
 package com.example.bluetoothtest.view.fragments;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -16,10 +22,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bluetoothtest.R;
+import com.example.bluetoothtest.utility.PermissionUtility;
 import com.example.bluetoothtest.utility.ProfileHelper;
 import com.example.bluetoothtest.utility.WindowSetting;
 import com.example.bluetoothtest.view.RecyclerViewScanner;
 import com.example.bluetoothtest.view_model.BluetoothViewModel;
+
+import java.security.Permission;
 
 
 public class FragmentBluetoothScanner extends Fragment {
@@ -31,6 +40,8 @@ public class FragmentBluetoothScanner extends Fragment {
     RecyclerViewScanner recyclerViewNearbyAdapter;
     WindowSetting windowSetting;
     Context context;
+    PermissionUtility permissionUtility;
+    BluetoothViewModel bluetoothViewModel;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -41,11 +52,39 @@ public class FragmentBluetoothScanner extends Fragment {
 
         recyclerViewNearbyDevices.setAdapter(recyclerViewNearbyAdapter);
 
-        BluetoothViewModel bluetoothViewModel = new ViewModelProvider(requireActivity()).get(BluetoothViewModel.class);
+        permissionUtility = new PermissionUtility(context, requireActivity());
 
-        bluetoothViewModel.getDevices().
-                observe(getViewLifecycleOwner(), devices -> recyclerViewNearbyAdapter.submitList(devices));
+        if (!checkForBluetoothAndLocationPermission()) {
+            AlertDialog dialogError = new AlertDialog.Builder(context).
+                    setView(R.layout.layout_dialog_bluetooth_adapter_not_enabled).
+                    create();
 
+            dialogError.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            DisplayMetrics metric = new DisplayMetrics();
+
+            requireActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
+
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            layoutParams.copyFrom(dialogError.getWindow().getAttributes());
+
+            layoutParams.width = (int) (metric.widthPixels * 0.75f);
+            layoutParams.height = (int) (metric.heightPixels * 1f);
+
+            dialogError.getWindow().setAttributes(layoutParams);
+
+            dialogError.show();
+
+            dialogError.findViewById(R.id.button_cancel_dialog_permission).
+                    setOnClickListener(v -> dialogError.cancel());
+
+        } else {
+            if (bluetoothViewModel == null)
+                bluetoothViewModel = new ViewModelProvider(requireActivity()).get(BluetoothViewModel.class);
+
+            bluetoothViewModel.getDevices().
+                    observe(getViewLifecycleOwner(), devices -> recyclerViewNearbyAdapter.submitList(devices));
+        }
 
         recyclerViewNearbyAdapter.setOnDeviceItemClickListener(device -> {
             //onDeviceClicked
@@ -80,6 +119,13 @@ public class FragmentBluetoothScanner extends Fragment {
         super.onStart();
         windowSetting = new WindowSetting(requireActivity().getWindow()).
                 setStatusBarColor(ContextCompat.getColor(context, R.color.colorBackgroundDarker));
+
+    }
+
+    public boolean checkForBluetoothAndLocationPermission() {
+        return permissionUtility.checkForPermission(Manifest.permission.BLUETOOTH) &&
+                permissionUtility.checkForPermission(Manifest.permission.BLUETOOTH_ADMIN) &&
+                permissionUtility.checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION);
 
     }
 
