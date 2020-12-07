@@ -12,13 +12,17 @@ import java.util.List;
 
 public class BluetoothRepository {
 
+    private BluetoothScanner scannerModel;
+
+    private Application application;
+
     public BluetoothRepository(Application application) {
-
-
+        this.application = application;
     }
 
     public List<BluetoothDevice> getDevices(BluetoothLeScanner scanner) {
-        return new BluetoothScanner(scanner).getDevices();
+        scannerModel = new BluetoothScanner(scanner, application);
+        return scannerModel.getDevices();
     }
 
     public void insertIntoAddedDevices(BluetoothDevice bluetoothDevice) {

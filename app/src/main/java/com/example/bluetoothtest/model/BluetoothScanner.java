@@ -1,5 +1,6 @@
 package com.example.bluetoothtest.model;
 
+import android.app.Application;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
@@ -16,20 +17,25 @@ public class BluetoothScanner {
 
     private List<BluetoothDevice> list;
 
-    private Set<BluetoothDevice> setDevices;
+    private final Set<BluetoothDevice> setDevices;
 
-    private BluetoothLeScanner scanner;
+    private final BluetoothLeScanner scanner;
 
     private boolean isScanning = false;
 
-    private Handler searchHandler;
+    private final Handler searchHandler;
 
-    public BluetoothScanner(BluetoothLeScanner scanner) {
+    private final Application application;
+
+    public BluetoothScanner(BluetoothLeScanner scanner, Application application) {
         this.scanner = scanner;
 
         setDevices = new HashSet<>();
 
-        searchHandler = new Handler();
+        searchHandler = new Handler(application.getMainLooper());
+
+        this.application = application;
+
     }
 
 
@@ -48,12 +54,11 @@ public class BluetoothScanner {
             stopScan();
 
 
-
         return list;
     }
 
 
-    private ScanCallback searchCallBack = new ScanCallback() {
+    private final ScanCallback searchCallBack = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
