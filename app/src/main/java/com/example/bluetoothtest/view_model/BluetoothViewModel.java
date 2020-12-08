@@ -33,19 +33,18 @@ public class BluetoothViewModel extends AndroidViewModel {
 
         adapter = manager.getAdapter();
 
-        adapter.enable();
-
         scanner = adapter.getBluetoothLeScanner();
 
         repository = new BluetoothRepository(application);
 
-
+        if (devices == null)
+        {
+            devices = new MutableLiveData<List<BluetoothDevice>>();
+        }
     }
 
 
     public LiveData<List<BluetoothDevice>> getDevices() {
-        if (devices == null)
-            devices = new MutableLiveData<>();
 
         devices.setValue(repository.getDevices(scanner));
 

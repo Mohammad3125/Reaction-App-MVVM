@@ -21,12 +21,6 @@ import com.example.bluetoothtest.R;
 import com.google.android.material.card.MaterialCardView;
 
 public class FragmentMainPage extends Fragment {
-    MaterialCardView cardView;
-    TextView showMoreTextView;
-    LinearLayout showMoreLayout;
-    RelativeLayout relativeLayout;
-    ImageView imageView;
-
     AutoCompleteTextView totalPlayerTextView;
     AutoCompleteTextView sportCategoryTextView;
 

@@ -2,7 +2,9 @@ package com.example.bluetoothtest.view.fragments;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,10 +52,6 @@ public class FragmentBluetoothScanner extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        recyclerViewNearbyAdapter = new RecyclerViewScanner(new RecyclerViewScanner.wordDiff());
-
-        recyclerViewNearbyDevices.setAdapter(recyclerViewNearbyAdapter);
-
         permissionUtility = new PermissionUtility(context, requireActivity());
 
         recyclerViewNearbyAdapter.setOnDeviceItemClickListener(device -> {
@@ -80,6 +79,10 @@ public class FragmentBluetoothScanner extends Fragment {
 
         recyclerViewNearbyDevices.setHasFixedSize(true);
 
+        recyclerViewNearbyAdapter = new RecyclerViewScanner(new RecyclerViewScanner.wordDiff());
+
+        recyclerViewNearbyDevices.setAdapter(recyclerViewNearbyAdapter);
+
 
     }
 
@@ -89,8 +92,6 @@ public class FragmentBluetoothScanner extends Fragment {
 
 
         if (!checkForBluetoothAndLocationPermission()) {
-
-
             AlertDialog dialogError = new AlertDialog.Builder(context).
                     setView(R.layout.layout_dialog_bluetooth_adapter_not_enabled).
                     create();
@@ -124,11 +125,15 @@ public class FragmentBluetoothScanner extends Fragment {
                     });
 
         } else {
-            if (bluetoothViewModel == null)
-                bluetoothViewModel = new ViewModelProvider(requireActivity()).get(BluetoothViewModel.class);
+
+            bluetoothViewModel = new ViewModelProvider(requireActivity()).get(BluetoothViewModel.class);
 
             bluetoothViewModel.getDevices().
-                    observe(getViewLifecycleOwner(), devices -> recyclerViewNearbyAdapter.submitList(devices));
+                    observe(getViewLifecycleOwner(), devices -> {
+                        recyclerViewNearbyAdapter.submitList(devices);
+                    });
+
+
         }
     }
 
@@ -141,9 +146,9 @@ public class FragmentBluetoothScanner extends Fragment {
     }
 
     public boolean checkForBluetoothAndLocationPermission() {
-        return permissionUtility.checkForPermission(Manifest.permission.BLUETOOTH) &&
-                permissionUtility.checkForPermission(Manifest.permission.BLUETOOTH_ADMIN) &&
-                permissionUtility.checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION);
+        return !permissionUtility.checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                || BluetoothAdapter.getDefaultAdapter().isEnabled();
+
 
     }
 

@@ -6,9 +6,11 @@ import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.os.Handler;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,12 +29,16 @@ public class BluetoothScanner {
 
     private final Application application;
 
+    private static final String TAG = "BluetoothScanner";
+
     public BluetoothScanner(BluetoothLeScanner scanner, Application application) {
         this.scanner = scanner;
 
         setDevices = new HashSet<>();
 
         searchHandler = new Handler(application.getMainLooper());
+
+        list = new ArrayList<>();
 
         this.application = application;
 
@@ -45,8 +51,8 @@ public class BluetoothScanner {
 
             searchHandler.postDelayed(() -> {
                 stopScan();
-                list.clear();
                 list.addAll(setDevices);
+                Log.i(TAG, "after search : devices size : " + list.size());
             }, 1700);
 
             startScan();
@@ -62,8 +68,8 @@ public class BluetoothScanner {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
-
             setDevices.add(result.getDevice());
+            Log.i(TAG, "onScanResult: Devices" );
         }
     };
 

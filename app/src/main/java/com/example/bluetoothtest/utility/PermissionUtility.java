@@ -24,7 +24,7 @@ public class PermissionUtility {
     }
 
     public boolean checkForPermission(String permission) {
-        return ContextCompat.checkSelfPermission(context, permission) == 0;
+        return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
     }
 
     public void requestPermission(String permission, int requestCode) {

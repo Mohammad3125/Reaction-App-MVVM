@@ -1,6 +1,8 @@
 package com.example.bluetoothtest.view.fragments;
 
 import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 import android.content.pm.PermissionInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,20 +38,20 @@ public class FragmentGetPermission extends Fragment {
 
         cardViewBluetooth.setOnClickListener(view ->
                 {
-                    if (permissionUtility.checkForPermission(Manifest.permission.BLUETOOTH))
-                        permissionUtility.requestPermission(Manifest.permission.BLUETOOTH, PermissionUtility.BLUETOOTH_REQUEST_CODE);
+                    if (!BluetoothAdapter.getDefaultAdapter().isEnabled())
+                        startActivity(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE));
                 }
         );
 
         cardViewLocation.setOnClickListener(view2 ->
                 {
-                    if (!permissionUtility.checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION))
+                    if (permissionUtility.checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION))
                         permissionUtility.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION, PermissionUtility.LOCATION_REQUEST_CODE);
                 }
         );
 
         cardViewCamera.setOnClickListener(view3 -> {
-                    if (!permissionUtility.checkForPermission(Manifest.permission.CAMERA))
+                    if (permissionUtility.checkForPermission(Manifest.permission.CAMERA))
                         permissionUtility.requestPermission(Manifest.permission.CAMERA, PermissionUtility.CAMERA_REQUEST_CODE);
                 }
         );
