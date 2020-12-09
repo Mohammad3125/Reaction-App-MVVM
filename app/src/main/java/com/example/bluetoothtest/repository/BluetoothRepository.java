@@ -22,6 +22,7 @@ public class BluetoothRepository {
     public BluetoothRepository(Application application) {
         this.application = application;
         devices = new MutableLiveData<>();
+        scannerModel = new BluetoothScanner(application);
     }
 
     public LiveData<List<BluetoothDevice>> getDevices() {
@@ -33,9 +34,8 @@ public class BluetoothRepository {
     }
 
     public void scan(BluetoothLeScanner scanner) {
-        if (scannerModel == null) scannerModel = new BluetoothScanner(scanner, application);
-
-        scannerModel.startScanProcess();
+        scannerModel.startScanProcess(scanner);
+        //BluetoothScanner.executorService.execute(() -> scannerModel.startScanProcess(scanner));
     }
 
 

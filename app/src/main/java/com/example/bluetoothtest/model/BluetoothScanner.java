@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class BluetoothScanner {
 
@@ -21,19 +23,20 @@ public class BluetoothScanner {
 
     private final Set<BluetoothDevice> setDevices;
 
-    private final BluetoothLeScanner scanner;
-
     private boolean isScanning = false;
 
     private final Handler searchHandler;
 
     private final Application application;
 
+    private static final int THREAD_NUMBER = 1;
+
+    public static final ExecutorService executorService =
+            Executors.newFixedThreadPool(THREAD_NUMBER);
+
     private static final String TAG = "BluetoothScanner";
 
-    public BluetoothScanner(BluetoothLeScanner scanner, Application application) {
-        this.scanner = scanner;
-
+    public BluetoothScanner(Application application) {
         setDevices = new HashSet<>();
 
         searchHandler = new Handler(application.getMainLooper());
@@ -54,31 +57,31 @@ public class BluetoothScanner {
         }
     };
 
-    public void startScanProcess() {
+    public void startScanProcess(BluetoothLeScanner scanner) {
 
         if (!isScanning) {
 
             searchHandler.postDelayed(() -> {
-                stopScan();
+                stopScan(scanner);
                 list.addAll(setDevices);
                 Log.i(TAG, "after search : devices size : " + list.size());
             }, 1700);
 
-            startScan();
+            startScan(scanner);
         } else
-            stopScan();
+            stopScan(scanner);
     }
 
     public List<BluetoothDevice> getDevices() {
         return list;
     }
 
-    private void startScan() {
+    private void startScan(BluetoothLeScanner scanner) {
         scanner.startScan(searchCallBack);
         isScanning = true;
     }
 
-    private void stopScan() {
+    private void stopScan(BluetoothLeScanner scanner) {
         scanner.stopScan(searchCallBack);
         isScanning = false;
     }
