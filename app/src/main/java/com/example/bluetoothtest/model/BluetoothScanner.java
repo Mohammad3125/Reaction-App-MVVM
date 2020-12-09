@@ -60,7 +60,6 @@ public class BluetoothScanner {
     public void startScanProcess(BluetoothLeScanner scanner) {
 
         if (!isScanning) {
-
             searchHandler.postDelayed(() -> {
                 stopScan(scanner);
                 list.addAll(setDevices);
