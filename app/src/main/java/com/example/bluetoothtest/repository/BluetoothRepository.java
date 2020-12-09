@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.BluetoothLeScanner;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.bluetoothtest.model.BluetoothScanner;
 
@@ -16,17 +17,26 @@ public class BluetoothRepository {
 
     private Application application;
 
+    private MutableLiveData<List<BluetoothDevice>> devices;
+
     public BluetoothRepository(Application application) {
         this.application = application;
+        devices = new MutableLiveData<>();
     }
 
-    public List<BluetoothDevice> getDevices(BluetoothLeScanner scanner) {
-        scannerModel = new BluetoothScanner(scanner, application);
-        return scannerModel.getDevices();
+    public LiveData<List<BluetoothDevice>> getDevices() {
+        return devices;
     }
 
     public void insertIntoAddedDevices(BluetoothDevice bluetoothDevice) {
 
     }
+
+    public void scan(BluetoothLeScanner scanner) {
+        if (scannerModel == null) scannerModel = new BluetoothScanner(scanner, application);
+
+        scannerModel.startScanProcess();
+    }
+
 
 }

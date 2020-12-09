@@ -20,7 +20,6 @@ import java.util.prefs.AbstractPreferences;
 
 public class BluetoothViewModel extends AndroidViewModel {
 
-    BluetoothAdapter adapter;
     BluetoothLeScanner scanner;
     BluetoothRepository repository;
 
@@ -31,27 +30,22 @@ public class BluetoothViewModel extends AndroidViewModel {
 
         BluetoothManager manager = (BluetoothManager) application.getSystemService(Context.BLUETOOTH_SERVICE);
 
-        adapter = manager.getAdapter();
-
-        scanner = adapter.getBluetoothLeScanner();
+        scanner = BluetoothAdapter.getDefaultAdapter().getBluetoothLeScanner();
 
         repository = new BluetoothRepository(application);
 
-        if (devices == null)
-        {
+        if (devices == null) {
             devices = new MutableLiveData<List<BluetoothDevice>>();
         }
     }
 
 
     public LiveData<List<BluetoothDevice>> getDevices() {
-
-        devices.setValue(repository.getDevices(scanner));
-
-        return devices;
+        return repository.getDevices();
     }
 
-    public boolean isAdaptorEnables() {
-        return adapter.isEnabled() && adapter != null;
+    public void startScan() {
+        repository.scan(scanner);
     }
+
 }

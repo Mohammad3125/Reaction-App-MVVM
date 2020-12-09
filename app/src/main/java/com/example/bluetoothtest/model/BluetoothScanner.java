@@ -45,7 +45,16 @@ public class BluetoothScanner {
     }
 
 
-    public List<BluetoothDevice> getDevices() {
+    private final ScanCallback searchCallBack = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+            super.onScanResult(callbackType, result);
+            setDevices.add(result.getDevice());
+            Log.i(TAG, "onScanResult: Devices");
+        }
+    };
+
+    public void startScanProcess() {
 
         if (!isScanning) {
 
@@ -58,20 +67,11 @@ public class BluetoothScanner {
             startScan();
         } else
             stopScan();
-
-
-        return list;
     }
 
-
-    private final ScanCallback searchCallBack = new ScanCallback() {
-        @Override
-        public void onScanResult(int callbackType, ScanResult result) {
-            super.onScanResult(callbackType, result);
-            setDevices.add(result.getDevice());
-            Log.i(TAG, "onScanResult: Devices" );
-        }
-    };
+    public List<BluetoothDevice> getDevices() {
+        return list;
+    }
 
     private void startScan() {
         scanner.startScan(searchCallBack);

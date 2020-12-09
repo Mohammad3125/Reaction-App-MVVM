@@ -54,6 +54,13 @@ public class FragmentBluetoothScanner extends Fragment {
 
         permissionUtility = new PermissionUtility(context, requireActivity());
 
+        bluetoothViewModel = new ViewModelProvider(requireActivity()).get(BluetoothViewModel.class);
+
+        bluetoothViewModel.getDevices().
+                observe(getViewLifecycleOwner(), devices -> {
+                    recyclerViewNearbyAdapter.submitList(devices);
+                });
+
         recyclerViewNearbyAdapter.setOnDeviceItemClickListener(device -> {
             //onDeviceClicked
         });
@@ -124,17 +131,13 @@ public class FragmentBluetoothScanner extends Fragment {
                         dialogError.cancel();
                     });
 
-        } else {
-
-            bluetoothViewModel = new ViewModelProvider(requireActivity()).get(BluetoothViewModel.class);
-
-            bluetoothViewModel.getDevices().
-                    observe(getViewLifecycleOwner(), devices -> {
-                        recyclerViewNearbyAdapter.submitList(devices);
-                    });
+        } else
+            bluetoothViewModel.startScan();
 
 
-        }
+
+
+
     }
 
     @Override
