@@ -117,6 +117,9 @@ public class FragmentBluetoothScanner extends Fragment {
 
             dialogError.getWindow().setAttributes(layoutParams);
 
+            WindowSetting dialogWindowsSetting = new WindowSetting(dialogError.getWindow());
+            dialogWindowsSetting.windowsFullScreen();
+
             dialogError.show();
 
             dialogError.findViewById(R.id.button_cancel_dialog_permission).
