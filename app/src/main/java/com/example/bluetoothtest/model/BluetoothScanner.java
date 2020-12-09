@@ -53,7 +53,7 @@ public class BluetoothScanner {
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
             setDevices.add(result.getDevice());
-            Log.i(TAG, "onScanResult: Devices");
+            Log.i(TAG, "onScanResult: Device name : " + result.getDevice().getName());
         }
     };
 
