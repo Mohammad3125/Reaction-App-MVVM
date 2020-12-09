@@ -62,7 +62,7 @@ public class FragmentBluetoothScanner extends Fragment {
                 });
 
         recyclerViewNearbyAdapter.setOnDeviceItemClickListener(device -> {
-            //onDeviceClicked
+            //handle clicks on each bluetooth items
         });
     }
 
