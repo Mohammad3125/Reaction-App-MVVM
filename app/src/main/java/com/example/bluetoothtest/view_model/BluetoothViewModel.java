@@ -30,8 +30,6 @@ public class BluetoothViewModel extends AndroidViewModel {
 
         BluetoothManager manager = (BluetoothManager) application.getSystemService(Context.BLUETOOTH_SERVICE);
 
-        scanner = BluetoothAdapter.getDefaultAdapter().getBluetoothLeScanner();
-
         repository = new BluetoothRepository(application);
     }
 
@@ -41,7 +39,7 @@ public class BluetoothViewModel extends AndroidViewModel {
     }
 
     public void startScan() {
-        repository.scan(scanner);
+        repository.scan(BluetoothAdapter.getDefaultAdapter().getBluetoothLeScanner());
     }
 
 }
