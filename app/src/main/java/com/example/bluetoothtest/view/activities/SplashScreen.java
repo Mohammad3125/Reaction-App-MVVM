@@ -7,10 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bluetoothtest.R;
@@ -20,10 +18,12 @@ public class SplashScreen extends AppCompatActivity {
     TextView textBlazePod;
     TextView textMoreansStudio;
     WindowSetting windowSetting;
-    private final int TIME_SPLASH_SCREEN = 3;
+
+    public static final String SPLASH_TIME_KEY = "time_splash_screen";
 
     public static final String SHARED_PREFERENCES_TAG = "tg-sharedPreference";
     public static final String LOGIN_STATE_KEY = "lg";
+    public int splashScreenTime = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,8 @@ public class SplashScreen extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_TAG, MODE_PRIVATE);
 
+        splashScreenTime = sharedPreferences.getInt(SPLASH_TIME_KEY, 3);
+
         new Handler().postDelayed(() -> {
             Class<?> myClass = MainActivity.class;
 
@@ -48,7 +50,7 @@ public class SplashScreen extends AppCompatActivity {
             startActivity(new Intent(this, myClass).putExtra("username", name));
 
             finish();
-        }, TIME_SPLASH_SCREEN * 1000);
+        }, splashScreenTime * 1000);
 
     }
 
@@ -82,4 +84,6 @@ public class SplashScreen extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         windowSetting.onSystemUiVisibilityChange(newConfig.orientation);
     }
+
+
 }

@@ -59,6 +59,13 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="alertDialogStyle" parent="Theme.MaterialComponents.Dialog">
+        <item name="cornerSize">12dp</item>
+        <item name="backgroundColor">@color/colorBackgroundDarker</item>
+        <item name="cornerFamily">rounded</item>
+
+    </style>
+
     <style name="SplashScreenStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/background</item>
         <item name="android:statusBarColor">@color/colorAccentF</item>

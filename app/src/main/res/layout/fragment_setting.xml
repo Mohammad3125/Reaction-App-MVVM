@@ -309,7 +309,7 @@
                     android:layout_height="36dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_permission" />
+                    android:src="@drawable/ic_version" />
 
                 <TextView
                     android:id="@+id/setting_page_text_view_app_version"
