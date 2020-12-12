@@ -39,7 +39,9 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <LinearLayout
+            android:id="@+id/setting_page_layout_users"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
@@ -72,6 +75,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/setting_page_layout_profile"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
@@ -120,13 +124,16 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="140dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:baselineAligned="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <LinearLayout
+            android:id="@+id/setting_page_layout_theme"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
@@ -182,11 +189,16 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <LinearLayout
+            android:id="@+id/setting_page_layout_permission"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
@@ -213,6 +225,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/setting_page_layout_startup_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
@@ -259,7 +272,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -267,6 +282,7 @@
 
 
         <LinearLayout
+            android:id="@+id/setting_page_layout_verison"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
@@ -278,14 +294,16 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ic_permission" />
+
             <TextView
+                android:id="@+id/setting_page_text_view_app_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/raleway_semibold"
                 android:text="0.5.2"
                 android:textColor="@color/colorAccentC"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -297,13 +315,15 @@
                 android:textSize="18sp" />
 
 
-
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/setting_page_layout_logout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
+            android:clickable="true"
+            android:contextClickable="true"
             android:orientation="vertical">
 
             <ImageView
@@ -329,8 +349,6 @@
 
 
     </LinearLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
