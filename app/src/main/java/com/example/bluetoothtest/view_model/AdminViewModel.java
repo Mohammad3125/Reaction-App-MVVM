@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.bluetoothtest.model.database.entities.admins.Admin;
+import com.example.bluetoothtest.model.database.entities.admins.AdminProfileUpdate;
 import com.example.bluetoothtest.repository.UsersRepository;
 
 import java.util.List;
@@ -38,6 +39,14 @@ public class AdminViewModel extends AndroidViewModel {
         repository.deleteFromAdmin(admin);
     }
 
+    public Admin getAdmin(String name) {
+        return repository.getAdmin(name);
+    }
+
+    public void update(AdminProfileUpdate adminProfileUpdate) {
+        repository.updateAdmin(adminProfileUpdate);
+    }
+
     public boolean doesAdminExist(String username, String password) {
         return repository.doesAdminExist(username, password);
     }
@@ -45,5 +54,6 @@ public class AdminViewModel extends AndroidViewModel {
     public boolean doesAdminExist(String username) {
         return repository.doesAdminExist(username);
     }
+
 
 }

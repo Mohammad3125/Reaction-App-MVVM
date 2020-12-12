@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_fSettingPreferences_to_fUserAdd"
             app:destination="@id/fUserAdd" />
+        <action
+            android:id="@+id/action_fSettingPreferences_to_fEditProfile"
+            app:destination="@id/fEditProfile" />
     </fragment>
     <fragment
         android:id="@+id/fEditProfile"
@@ -68,6 +71,9 @@
         <argument
             android:name="personName"
             app:argType="string" />
+        <argument
+            android:name="isAdmin"
+            app:argType="boolean" />
     </fragment>
     <activity
         android:id="@+id/loginHost"

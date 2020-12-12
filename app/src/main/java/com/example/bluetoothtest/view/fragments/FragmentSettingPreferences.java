@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import androidx.navigation.Navigation;
 import com.example.bluetoothtest.BuildConfig;
 import com.example.bluetoothtest.R;
 import com.example.bluetoothtest.utility.WindowSetting;
+import com.example.bluetoothtest.view.activities.MainActivity;
 import com.example.bluetoothtest.view.activities.SplashScreen;
 import com.example.bluetoothtest.view.fragments.fragmentutility.AlertDialogSplashTimePicker;
 
@@ -102,6 +104,7 @@ public class FragmentSettingPreferences extends Fragment implements View.OnClick
         logoutLayout.setOnClickListener(this);
         usersLayout.setOnClickListener(this);
         startupTimeLayout.setOnClickListener(this);
+        profileLayout.setOnClickListener(this);
 
 
     }
@@ -125,6 +128,8 @@ public class FragmentSettingPreferences extends Fragment implements View.OnClick
 
     @Override
     public void onClick(View view) {
+        view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.button_animation));
+
         if (view.getId() == logoutLayout.getId()) {
             getContext().
                     getSharedPreferences(SplashScreen.SHARED_PREFERENCES_TAG, Context.MODE_PRIVATE).
@@ -133,7 +138,6 @@ public class FragmentSettingPreferences extends Fragment implements View.OnClick
             Navigation.findNavController(view)
                     .navigate(FragmentSettingPreferencesDirections.
                             actionFSettingPreferencesToLoginHost());
-
         }
 
         if (view.getId() == usersLayout.getId())
@@ -157,6 +161,13 @@ public class FragmentSettingPreferences extends Fragment implements View.OnClick
                         apply();
             });
 
+
+        }
+
+        if (view.getId() == profileLayout.getId()) {
+            Navigation.findNavController(view).
+                    navigate(FragmentSettingPreferencesDirections.
+                            actionFSettingPreferencesToFEditProfile(MainActivity.username, true));
 
         }
 

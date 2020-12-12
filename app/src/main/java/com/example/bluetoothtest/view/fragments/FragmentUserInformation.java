@@ -81,11 +81,9 @@ public class FragmentUserInformation extends Fragment {
         getBack.setOnClickListener(m -> Navigation.findNavController(m).navigateUp());
 
 
-        profileImage.setOnClickListener(v -> {
-            Navigation.findNavController(v).
-                    navigate(FragmentUserInformationDirections
-                            .actionFUserInformationToFragmentEditProfile(personName));
-        });
+        profileImage.setOnClickListener(v -> Navigation.findNavController(v).
+                navigate(FragmentUserInformationDirections
+                        .actionFUserInformationToFragmentEditProfile(personName, false)));
 
     }
 

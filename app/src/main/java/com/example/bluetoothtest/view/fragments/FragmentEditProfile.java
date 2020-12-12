@@ -18,11 +18,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.example.bluetoothtest.model.database.entities.admins.Admin;
+import com.example.bluetoothtest.model.database.entities.admins.AdminProfileUpdate;
 import com.example.bluetoothtest.model.database.entities.users.User;
 import com.example.bluetoothtest.utility.WindowSetting;
 import com.example.bluetoothtest.view.activities.MainActivity;
 import com.example.bluetoothtest.utility.ProfileHelper;
 import com.example.bluetoothtest.R;
+import com.example.bluetoothtest.view_model.AdminViewModel;
 import com.example.bluetoothtest.view_model.UserViewModel;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -44,6 +47,10 @@ public class FragmentEditProfile extends Fragment {
     Button buttonDone;
 
     WindowSetting windowSetting;
+
+    Admin admin;
+
+    User user;
 
     @Nullable
     @Override
@@ -74,14 +81,28 @@ public class FragmentEditProfile extends Fragment {
 
         UserViewModel userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
-        User user = userViewModel.getUser(arguments.getPersonName(), MainActivity.username);
+        AdminViewModel adminViewModel = new ViewModelProvider(requireActivity()).get(AdminViewModel.class);
 
-        profileBitmapPath = user.profilePath;
+        String personName = arguments.getPersonName();
+        String username;
 
-        String username = user.name;
+        boolean isAdmin = arguments.getIsAdmin();
+        if (isAdmin) {
+            admin = adminViewModel.getAdmin(personName);
+            profileBitmapPath = admin.profilePath;
+            username = admin.name;
+
+        } else {
+
+            user = userViewModel.getUser(personName, MainActivity.username);
+            profileBitmapPath = user.profilePath;
+            username = user.name;
+        }
+
+
+        String finalUserName = username;
 
         ProfileHelper.getImage(profileBitmapPath, profileImage);
-
 
         view.findViewById(R.id.edit_profile_button_cancel).
                 setOnClickListener(this::popBack);
@@ -96,9 +117,12 @@ public class FragmentEditProfile extends Fragment {
                     ProfileHelper.delete(profileBitmapPath); //Deleting cache file
 
                     profileBitmapPath = uploaderHelper.uploadProfile
-                            (nameFile, MainActivity.username, finalBitmap);
+                            (nameFile, isAdmin ? finalUserName : MainActivity.username, finalBitmap);
 
-                    userViewModel.update(username, profileBitmapPath, MainActivity.username); // updating database
+                    if (isAdmin)
+                        adminViewModel.update(new AdminProfileUpdate(finalUserName, profileBitmapPath));
+                    else
+                        userViewModel.update(finalUserName, profileBitmapPath, MainActivity.username); // updating database
 
                     popBack(v);
                 });

@@ -35,7 +35,7 @@ public class FragmentBluetoothScanner extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_bluetooth_scan, container, false);
-
+/*
 
         InitViews(fragmentView);
 
@@ -52,7 +52,7 @@ public class FragmentBluetoothScanner extends Fragment {
                 Toast.makeText(getContext(), "Starting Scan", Toast.LENGTH_SHORT).show();
 
             }
-        });
+        });*/
 
 
         return fragmentView;
@@ -60,20 +60,20 @@ public class FragmentBluetoothScanner extends Fragment {
     }
 
     private void startAnimateViews() {
-        ConnectedDeviceTextView.animate().translationY(1f).setDuration(360);
+     /*   ConnectedDeviceTextView.animate().translationY(1f).setDuration(360);
         ConnectedDeviceListView.animate().translationY(1f).setDuration(370);
         ScanButton.animate().translationY(1f).setDuration(380);
         ScannedDeviceListView.animate().translationY(1f).setDuration(390);
-        FoundedDevicesTextView.animate().translationY(1f).setDuration(400);
+        FoundedDevicesTextView.animate().translationY(1f).setDuration(400);*/
 
     }
 
     private void InitViews(View fragmentView) {
-        ScannedDeviceListView = fragmentView.findViewById(R.id.Found_Devices_ListView);
+     /*   ScannedDeviceListView = fragmentView.findViewById(R.id.Found_Devices_ListView);
         ConnectedDeviceListView = fragmentView.findViewById(R.id.Added_Devices_ListView);
         ConnectedDeviceTextView = fragmentView.findViewById(R.id.TextView_Connected_Device);
         FoundedDevicesTextView = fragmentView.findViewById(R.id.TextViewAddedDevice);
-        ScanButton = fragmentView.findViewById(R.id.Button_Scan);
+        ScanButton = fragmentView.findViewById(R.id.Button_Scan);*/
     }
 
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.example.bluetoothtest.model.database.AppDatabase;
 import com.example.bluetoothtest.model.database.entities.admins.Admin;
 import com.example.bluetoothtest.model.database.entities.admins.AdminDAO;
+import com.example.bluetoothtest.model.database.entities.admins.AdminProfileUpdate;
 import com.example.bluetoothtest.model.database.entities.users.User;
 import com.example.bluetoothtest.model.database.entities.users.UserDAO;
 import com.example.bluetoothtest.model.database.entities.users.UserProfileUpdatePartial;
@@ -30,7 +31,6 @@ public class UsersRepository {
                 getINSTANCE(application);
 
 
-
         userDAO = appDatabase.userDOA();
 
         adminDAO = appDatabase.adminDOA();
@@ -41,6 +41,16 @@ public class UsersRepository {
 
     public LiveData<List<Admin>> getAdmins() {
         return admins;
+    }
+
+    public Admin getAdmin(String name) {
+        return adminDAO.getAdmin(name);
+    }
+
+    public void updateAdmin(AdminProfileUpdate adminProfileUpdate) {
+        AppDatabase.databaseExecutorService.execute(() ->
+                adminDAO.update(adminProfileUpdate));
+
     }
 
     public boolean doesAdminExist(String name, String password) {
