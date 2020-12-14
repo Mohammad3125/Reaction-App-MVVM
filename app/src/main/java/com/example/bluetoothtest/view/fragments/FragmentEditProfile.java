@@ -25,8 +25,11 @@ import com.example.bluetoothtest.utility.WindowSetting;
 import com.example.bluetoothtest.view.activities.MainActivity;
 import com.example.bluetoothtest.utility.ProfileHelper;
 import com.example.bluetoothtest.R;
+import com.example.bluetoothtest.view.fragments.fragmentutility.DialogValidator;
 import com.example.bluetoothtest.view_model.AdminViewModel;
 import com.example.bluetoothtest.view_model.UserViewModel;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -52,11 +55,31 @@ public class FragmentEditProfile extends Fragment {
 
     User user;
 
+    TextInputLayout usernameTextInputLayout;
+    TextInputLayout passwordTextInputLayout;
+    TextInputLayout rePasswordTextInputLayout;
+
+    TextInputEditText usernameEditText;
+    TextInputEditText passwordEditText;
+    TextInputEditText rePasswordEditText;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        initViews(view);
 
+        return view;
+    }
+
+    private void initViews(View view) {
+        usernameTextInputLayout = view.findViewById(R.id.edit_profile_layout_edit_username);
+        passwordTextInputLayout = view.findViewById(R.id.edit_profile_layout_edit_text_password);
+        rePasswordTextInputLayout = view.findViewById(R.id.edit_profile_layout_edit_text_re_password);
+        usernameEditText = view.findViewById(R.id.edit_profile_edit_text_username);
+        passwordEditText = view.findViewById(R.id.edit_profile_edit_text_password);
+        rePasswordEditText = view.findViewById(R.id.edit_profile_edit_text_re_password);
     }
 
     @Override
@@ -75,7 +98,6 @@ public class FragmentEditProfile extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         profileImage = view.findViewById(R.id.edit_profile_image_view);
-
 
         FragmentEditProfileArgs arguments = FragmentEditProfileArgs.fromBundle(getArguments());
 
@@ -97,10 +119,14 @@ public class FragmentEditProfile extends Fragment {
             user = userViewModel.getUser(personName, MainActivity.username);
             profileBitmapPath = user.profilePath;
             username = user.name;
+            passwordTextInputLayout.setVisibility(View.GONE);
+            rePasswordTextInputLayout.setVisibility(View.GONE);
         }
 
 
         String finalUserName = username;
+
+        usernameEditText.setText(finalUserName);
 
         ProfileHelper.getImage(profileBitmapPath, profileImage);
 
@@ -116,22 +142,25 @@ public class FragmentEditProfile extends Fragment {
 
                     ProfileHelper.delete(profileBitmapPath); //Deleting cache file
 
+                    String finalStringUsername = usernameEditText.getText().toString().trim();
+
+                    if (!DialogValidator.isLengthValid(finalStringUsername, 6, 26)) {
+                        DialogValidator.setError("Username should be between 6 and 26 characters", usernameTextInputLayout);
+                        return;
+                    }
+
                     profileBitmapPath = uploaderHelper.uploadProfile
-                            (nameFile, isAdmin ? finalUserName : MainActivity.username, finalBitmap);
+                            (nameFile, isAdmin ? finalStringUsername : MainActivity.username, finalBitmap);
 
                     if (isAdmin)
-                        adminViewModel.update(new AdminProfileUpdate(finalUserName, profileBitmapPath));
+                        adminViewModel.update(new AdminProfileUpdate(finalStringUsername, profileBitmapPath));
                     else
-                        userViewModel.update(finalUserName, profileBitmapPath, MainActivity.username); // updating database
+                        userViewModel.update(finalStringUsername, profileBitmapPath, MainActivity.username); // updating database
 
                     popBack(v);
                 });
 
         view.findViewById(R.id.edit_profile_pick_image).
-                setOnClickListener(v -> startCameraIntent());
-
-
-        view.findViewById(R.id.edit_profile_fab_edit_image).
                 setOnClickListener(v -> startCameraIntent());
 
 
@@ -169,8 +198,6 @@ public class FragmentEditProfile extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
 
                 ProfileHelper.delete(profileBitmapPath); // Deleting previous picture
-
-                buttonDone.setVisibility(View.VISIBLE);
 
                 nameFile = "";
 

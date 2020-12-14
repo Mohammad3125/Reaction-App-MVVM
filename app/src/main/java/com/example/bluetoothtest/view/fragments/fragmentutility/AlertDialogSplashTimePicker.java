@@ -56,7 +56,7 @@ public class AlertDialogSplashTimePicker extends DialogFragment {
         return builder.create();
     }
 
-    public void setOnNumberSlected(onNumberSelected onNumberSlected) {
+    public void setOnNumberSelected(onNumberSelected onNumberSlected) {
         this.onNumberSelected = onNumberSlected;
     }
 

@@ -152,7 +152,7 @@ public class FragmentSettingPreferences extends Fragment implements View.OnClick
             dialogSplashTimePicker.
                     show(requireActivity().getSupportFragmentManager(), "splash_screen_number_picker_dialog");
 
-            dialogSplashTimePicker.setOnNumberSlected(number ->
+            dialogSplashTimePicker.setOnNumberSelected(number ->
             {
                 splashScreenTime.setText(String.valueOf(number));
 

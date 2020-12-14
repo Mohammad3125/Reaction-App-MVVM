@@ -15,7 +15,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DONE"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,17 +59,6 @@
 
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/edit_profile_fab_edit_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="TODO"
-        android:tint="@android:color/white"
-        app:elevation="22dp"
-        app:fabSize="mini"
-        app:layout_constraintEnd_toEndOf="@id/edit_profile_image_view"
-        app:layout_constraintTop_toTopOf="@id/edit_profile_image_view"
-        app:srcCompat="@drawable/ic_edit" />
 
 
     <Button
@@ -93,6 +81,136 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_profile_layout_edit_username"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:elevation="15dp"
+        android:hint="USERNAME"
+        android:textColorHint="@color/colorAccent"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/chip_color_selector"
+        app:boxStrokeWidth="2dp"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/colorAccentB"
+        app:errorEnabled="true"
+        app:errorTextColor="@color/colorAccentD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_pick_image"
+        app:startIconDrawable="@drawable/ic_user"
+        app:startIconTint="@color/colorAccentA">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_profile_edit_text_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/raleway_semibold"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorAccent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_layout_edit_username">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_profile_layout_edit_text_password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="5"
+            android:elevation="15dp"
+            android:hint="PASSWORD"
+            android:textColorHint="@color/colorAccent"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/chip_color_selector"
+            app:boxStrokeWidth="2dp"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorAccentB"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/colorAccentD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_profile_pick_image"
+            app:startIconDrawable="@drawable/ic_user"
+            app:startIconTint="@color/colorAccentA">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_profile_edit_text_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/raleway_semibold"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorAccent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_profile_layout_edit_text_re_password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_weight="5"
+            android:elevation="15dp"
+            android:hint="CONFIRM PASSWORD"
+            android:textColorHint="@color/colorAccent"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/chip_color_selector"
+            app:boxStrokeWidth="2dp"
+            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorAccentB"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/colorAccentD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_profile_pick_image"
+            app:startIconDrawable="@drawable/ic_user"
+            app:startIconTint="@color/colorAccentA">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_profile_edit_text_re_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/raleway_semibold"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorAccent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

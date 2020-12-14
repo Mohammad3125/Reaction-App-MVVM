@@ -9,7 +9,7 @@ public class DialogValidator {
 
     public static boolean isLengthValid(String usernameText, int min, int max) {
         int length = usernameText.length();
-        return length > min && length < max;
+        return length >= min && length <= max;
     }
 
     public static void setError(String error, TextInputLayout layout) {
