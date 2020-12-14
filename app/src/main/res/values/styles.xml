@@ -65,5 +65,11 @@
         <item name="android:statusBarColor">@color/colorAccentF</item>
     </style>
 
+    <style name="dialogRoundCorners" parent="Theme.MaterialComponents.Dialog">
+        <item name="cornerSize">12dp</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
 
 </resources>

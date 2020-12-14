@@ -30,6 +30,7 @@ import com.example.bluetoothtest.utility.PermissionUtility;
 import com.example.bluetoothtest.utility.ProfileHelper;
 import com.example.bluetoothtest.utility.WindowSetting;
 import com.example.bluetoothtest.view.RecyclerViewScanner;
+import com.example.bluetoothtest.view.fragments.fragmentutility.DialogGoToPermission;
 import com.example.bluetoothtest.view_model.BluetoothViewModel;
 
 import java.security.Permission;
@@ -99,43 +100,18 @@ public class FragmentBluetoothScanner extends Fragment {
 
 
         if (!checkForBluetoothAndLocationPermission()) {
-            AlertDialog dialogError = new AlertDialog.Builder(context).
-                    setView(R.layout.layout_dialog_bluetooth_adapter_not_enabled).
-                    create();
 
-            dialogError.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            DialogGoToPermission dialogGoToPermission = new DialogGoToPermission();
+            dialogGoToPermission.show(requireActivity().getSupportFragmentManager(), "dialog-permission");
 
-            DisplayMetrics metric = new DisplayMetrics();
-
-            requireActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
-
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-            layoutParams.copyFrom(dialogError.getWindow().getAttributes());
-
-            layoutParams.width = (int) (metric.widthPixels * 0.75f);
-            layoutParams.height = (int) (metric.heightPixels * 1f);
-
-            dialogError.getWindow().setAttributes(layoutParams);
-
-            dialogError.show();
-
-            dialogError.findViewById(R.id.button_cancel_dialog_permission).
-                    setOnClickListener(v -> dialogError.cancel());
-
-
-            dialogError.findViewById(R.id.button_give_permission_dialog_permission)
-                    //getView here has to be called, because dialog's view doesn't have NavController
-                    .setOnClickListener(v2 -> {
-                        Navigation.findNavController(getView()).
-                                navigate(FragmentBluetoothScannerDirections.actionFragmentBluetoothScannerToFragmentGetPermission());
-                        dialogError.cancel();
-                    });
+            dialogGoToPermission.setOnGivePermissionClicked(() -> {
+                Navigation.findNavController(getView())
+                        .navigate(FragmentBluetoothScannerDirections.actionFragmentBluetoothScannerToFragmentGetPermission());
+                dialogGoToPermission.dismiss();
+            });
 
         } else
             bluetoothViewModel.startScan();
-
-
-
 
 
     }

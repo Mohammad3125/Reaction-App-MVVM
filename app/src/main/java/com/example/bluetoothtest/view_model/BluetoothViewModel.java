@@ -31,11 +31,19 @@ public class BluetoothViewModel extends AndroidViewModel {
         BluetoothManager manager = (BluetoothManager) application.getSystemService(Context.BLUETOOTH_SERVICE);
 
         repository = new BluetoothRepository(application);
+
+
+        devices = new MutableLiveData<>();
+
     }
 
 
     public LiveData<List<BluetoothDevice>> getDevices() {
-        return repository.getDevices();
+
+
+        devices.setValue(repository.getDevices());
+
+        return devices;
     }
 
     public void startScan() {

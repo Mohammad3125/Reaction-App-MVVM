@@ -6,7 +6,6 @@
     android:layout_width="wrap_content"
     android:paddingTop="20dp"
     android:clipToPadding="false"
-
     android:background="@drawable/background_dialog"
     android:layout_height="wrap_content">
 

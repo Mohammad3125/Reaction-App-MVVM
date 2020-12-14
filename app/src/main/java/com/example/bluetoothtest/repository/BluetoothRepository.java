@@ -17,24 +17,27 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class BluetoothRepository {
 
-    private BluetoothScanner scannerModel;
+    private final BluetoothScanner scannerModel;
 
     private Application application;
 
-    private MutableLiveData<List<BluetoothDevice>> devices;
+    List<BluetoothDevice> bluetoothDevices;
+
+    BluetoothLeScanner scanner;
 
     public BluetoothRepository(Application application) {
         this.application = application;
-        devices = new MutableLiveData<>();
         scannerModel = new BluetoothScanner(application);
+        bluetoothDevices = new ArrayList<>();
+
     }
 
-    public LiveData<List<BluetoothDevice>> getDevices() {
-        if (scannerModel == null) scannerModel = new BluetoothScanner(application);
-
-        devices.setValue(scannerModel.getDevices());
-
-        return devices;
+    public List<BluetoothDevice> getDevices() {
+        scannerModel.setOnDeviceScanned(d -> {
+            bluetoothDevices.addAll(d);
+            scannerModel.startScanProcess(scanner);
+        });
+        return bluetoothDevices;
     }
 
     public void insertIntoAddedDevices(BluetoothDevice bluetoothDevice) {
@@ -43,6 +46,7 @@ public class BluetoothRepository {
 
     public void scan(BluetoothLeScanner scanner) {
         scannerModel.startScanProcess(scanner);
+        this.scanner = scanner;
         //BluetoothScanner.executorService.execute(() -> scannerModel.startScanProcess(scanner));
     }
 

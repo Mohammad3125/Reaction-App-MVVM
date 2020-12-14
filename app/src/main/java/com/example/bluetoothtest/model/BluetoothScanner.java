@@ -36,6 +36,9 @@ public class BluetoothScanner {
 
     private static final String TAG = "BluetoothScanner";
 
+    OnDeviceScanned onDeviceScanned;
+
+
     public BluetoothScanner(Application application) {
         setDevices = new HashSet<>();
 
@@ -63,9 +66,11 @@ public class BluetoothScanner {
             searchHandler.postDelayed(() -> {
                 stopScan(scanner);
                 list.addAll(setDevices);
+                onDeviceScanned.onScanned(list);
                 Log.i(TAG, "after search : devices size : " + list.size());
             }, 1700);
 
+            list.clear();
             startScan(scanner);
         } else
             stopScan(scanner);
@@ -83,6 +88,14 @@ public class BluetoothScanner {
     private void stopScan(BluetoothLeScanner scanner) {
         scanner.stopScan(searchCallBack);
         isScanning = false;
+    }
+
+    public void setOnDeviceScanned(OnDeviceScanned onDeviceScanned) {
+        this.onDeviceScanned = onDeviceScanned;
+    }
+
+    public interface OnDeviceScanned {
+        void onScanned(List<BluetoothDevice> devices);
     }
 
 

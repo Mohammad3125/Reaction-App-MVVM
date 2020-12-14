@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +20,7 @@ import androidx.navigation.Navigation;
 import com.example.bluetoothtest.R;
 import com.example.bluetoothtest.utility.PermissionUtility;
 
-public class FragmentGetPermission extends Fragment {
+public class FragmentGetPermission extends Fragment implements View.OnClickListener {
 
     CardView cardViewBluetooth;
     CardView cardViewLocation;
@@ -36,25 +37,12 @@ public class FragmentGetPermission extends Fragment {
 
         permissionUtility = new PermissionUtility(getContext(), requireActivity());
 
-        cardViewBluetooth.setOnClickListener(view ->
-                {
-                    if (!BluetoothAdapter.getDefaultAdapter().isEnabled())
-                        startActivity(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE));
-                }
-        );
+        cardViewBluetooth.setOnClickListener(this);
 
-        cardViewLocation.setOnClickListener(view2 ->
-                {
-                    if (permissionUtility.checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION))
-                        permissionUtility.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION, PermissionUtility.LOCATION_REQUEST_CODE);
-                }
-        );
+        cardViewLocation.setOnClickListener(this);
 
-        cardViewCamera.setOnClickListener(view3 -> {
-                    if (permissionUtility.checkForPermission(Manifest.permission.CAMERA))
-                        permissionUtility.requestPermission(Manifest.permission.CAMERA, PermissionUtility.CAMERA_REQUEST_CODE);
-                }
-        );
+        cardViewCamera.setOnClickListener(this);
+
 
     }
 
@@ -79,5 +67,23 @@ public class FragmentGetPermission extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onClick(View view) {
+        view.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.button_animation));
+        int id = view.getId();
+        if (id == cardViewLocation.getId()) {
+            if (permissionUtility.checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION))//LOGIC IS REVERSED
+                permissionUtility.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION, PermissionUtility.LOCATION_REQUEST_CODE);
+        } else if (id == cardViewBluetooth.getId()) {
+            if (!BluetoothAdapter.getDefaultAdapter().isEnabled())
+                startActivity(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE));
+        } else if (id == cardViewCamera.getId()) {
+            if (permissionUtility.checkForPermission(Manifest.permission.CAMERA))
+                permissionUtility.requestPermission(Manifest.permission.CAMERA, PermissionUtility.CAMERA_REQUEST_CODE);
+        }
+
+
     }
 }
