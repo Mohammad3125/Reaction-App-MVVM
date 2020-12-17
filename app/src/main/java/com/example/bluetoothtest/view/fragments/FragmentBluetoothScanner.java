@@ -122,6 +122,9 @@ public class FragmentBluetoothScanner extends Fragment {
         windowSetting = new WindowSetting(requireActivity().getWindow()).
                 setStatusBarColor(ContextCompat.getColor(context, R.color.colorBackgroundDarker));
 
+
+
+
     }
 
     public boolean checkForBluetoothAndLocationPermission() {

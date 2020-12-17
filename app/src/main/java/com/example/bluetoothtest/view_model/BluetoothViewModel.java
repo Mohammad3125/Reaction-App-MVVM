@@ -39,8 +39,6 @@ public class BluetoothViewModel extends AndroidViewModel {
 
 
     public LiveData<List<BluetoothDevice>> getDevices() {
-
-
         devices.setValue(repository.getDevices());
 
         return devices;

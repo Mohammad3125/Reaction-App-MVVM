@@ -25,6 +25,8 @@ public class BluetoothRepository {
 
     BluetoothLeScanner scanner;
 
+
+
     public BluetoothRepository(Application application) {
         this.application = application;
         scannerModel = new BluetoothScanner(application);
@@ -34,6 +36,7 @@ public class BluetoothRepository {
 
     public List<BluetoothDevice> getDevices() {
         scannerModel.setOnDeviceScanned(d -> {
+            bluetoothDevices.clear();
             bluetoothDevices.addAll(d);
             scannerModel.startScanProcess(scanner);
         });
@@ -49,6 +52,7 @@ public class BluetoothRepository {
         this.scanner = scanner;
         //BluetoothScanner.executorService.execute(() -> scannerModel.startScanProcess(scanner));
     }
+
 
 
 }
