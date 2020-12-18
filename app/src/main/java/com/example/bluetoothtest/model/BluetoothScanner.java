@@ -68,12 +68,11 @@ public class BluetoothScanner {
                 list.addAll(setDevices);
                 onDeviceScanned.onScanned(list);
                 Log.i(TAG, "after search : devices size : " + list.size());
-            }, 1700);
-
+            }, 6000);
             list.clear();
+            setDevices.clear();
             startScan(scanner);
-        } else
-            stopScan(scanner);
+        }
     }
 
     public List<BluetoothDevice> getDevices() {

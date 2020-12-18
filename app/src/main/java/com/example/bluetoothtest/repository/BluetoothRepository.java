@@ -25,6 +25,7 @@ public class BluetoothRepository {
 
     BluetoothLeScanner scanner;
 
+    OnDevicesReady onDevicesReady;
 
 
     public BluetoothRepository(Application application) {
@@ -32,14 +33,10 @@ public class BluetoothRepository {
         scannerModel = new BluetoothScanner(application);
         bluetoothDevices = new ArrayList<>();
 
+
     }
 
     public List<BluetoothDevice> getDevices() {
-        scannerModel.setOnDeviceScanned(d -> {
-            bluetoothDevices.clear();
-            bluetoothDevices.addAll(d);
-            scannerModel.startScanProcess(scanner);
-        });
         return bluetoothDevices;
     }
 
@@ -48,11 +45,23 @@ public class BluetoothRepository {
     }
 
     public void scan(BluetoothLeScanner scanner) {
+        scannerModel.setOnDeviceScanned(d -> {
+            bluetoothDevices.clear();
+            bluetoothDevices.addAll(d);
+            onDevicesReady.getDevices(bluetoothDevices);
+            scannerModel.startScanProcess(scanner);
+        });
         scannerModel.startScanProcess(scanner);
         this.scanner = scanner;
         //BluetoothScanner.executorService.execute(() -> scannerModel.startScanProcess(scanner));
     }
 
 
+    public void setOnDevicesReady(OnDevicesReady onDevicesReady) {
+        this.onDevicesReady = onDevicesReady;
+    }
 
+    public interface OnDevicesReady {
+        void getDevices(List<BluetoothDevice> devices);
+    }
 }
