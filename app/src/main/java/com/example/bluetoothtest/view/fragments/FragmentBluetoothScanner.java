@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -48,10 +49,13 @@ public class FragmentBluetoothScanner extends Fragment {
     PermissionUtility permissionUtility;
     BluetoothViewModel bluetoothViewModel;
 
+    LocationManager locationManager;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
 
         permissionUtility = new PermissionUtility(context, requireActivity());
 
@@ -123,12 +127,10 @@ public class FragmentBluetoothScanner extends Fragment {
                 setStatusBarColor(ContextCompat.getColor(context, R.color.colorBackgroundDarker));
 
 
-
-
     }
 
     public boolean checkForBluetoothAndLocationPermission() {
-        return !permissionUtility.checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+        return !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || BluetoothAdapter.getDefaultAdapter().isEnabled();
 
 

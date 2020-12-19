@@ -2,14 +2,19 @@ package com.example.bluetoothtest.view.fragments;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PermissionInfo;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,10 +33,15 @@ public class FragmentGetPermission extends Fragment implements View.OnClickListe
     ImageView imageViewGetBack;
 
     PermissionUtility permissionUtility;
+    LocationManager locationManager;
+
+    Context context;
 
     @Override
     public void onStart() {
         super.onStart();
+
+        locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
 
         imageViewGetBack.setOnClickListener(view -> Navigation.findNavController(view).navigateUp());
 
@@ -52,6 +62,8 @@ public class FragmentGetPermission extends Fragment implements View.OnClickListe
         View view = inflater.inflate(R.layout.fragment_ask_permision, container, false);
 
         initViews(view);
+
+        context = requireContext();
 
         return view;
     }
@@ -74,14 +86,22 @@ public class FragmentGetPermission extends Fragment implements View.OnClickListe
         view.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.button_animation));
         int id = view.getId();
         if (id == cardViewLocation.getId()) {
-            if (permissionUtility.checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION))//LOGIC IS REVERSED
-                permissionUtility.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION, PermissionUtility.LOCATION_REQUEST_CODE);
+            //LOGIC IS REVERSED
+            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            } else
+                Toast.makeText(context, "Your location is already enabled", Toast.LENGTH_SHORT).show();
+
         } else if (id == cardViewBluetooth.getId()) {
             if (!BluetoothAdapter.getDefaultAdapter().isEnabled())
                 startActivity(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE));
+            else
+                Toast.makeText(context, "Your bluetooth is already enabled", Toast.LENGTH_SHORT).show();
         } else if (id == cardViewCamera.getId()) {
             if (permissionUtility.checkForPermission(Manifest.permission.CAMERA))
                 permissionUtility.requestPermission(Manifest.permission.CAMERA, PermissionUtility.CAMERA_REQUEST_CODE);
+            else
+                Toast.makeText(context, "You have already granted camera access ", Toast.LENGTH_SHORT).show();
         }
 
 
