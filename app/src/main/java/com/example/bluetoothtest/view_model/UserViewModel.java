@@ -49,8 +49,16 @@ public class UserViewModel extends AndroidViewModel {
         appRepository.updateUser(username, profilePath, parent);
     }
 
+    public void updateAllUsersParent(String parentName, String oldParentName) {
+        appRepository.updateAllUsersParent(parentName, oldParentName);
+    }
+
     public boolean doesUserExists(String username, String parentName) {
         return appRepository.doesUserExist(username, parentName);
+    }
+
+    public void updateUserName(String username, String oldUserName, String profilePath, String parentName) {
+        appRepository.updateUserName(username, oldUserName, profilePath, parentName);
     }
 
 }

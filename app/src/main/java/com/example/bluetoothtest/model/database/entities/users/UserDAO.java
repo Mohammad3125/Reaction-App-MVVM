@@ -25,6 +25,13 @@ public interface UserDAO {
     @Update(entity = User.class)
     void update(UserProfileUpdatePartial updatePartial);
 
+    @Query("UPDATE users_table SET parent =:parentName WHERE parent= :oldParentName")
+    void updateAllUsersParent(String parentName, String oldParentName);
+
+
+    @Query("UPDATE users_table SET name=:username,profile_path=:profilePath WHERE parent = :parentName AND name=:oldUsername ")
+    void updateUsername(String username, String oldUsername,String profilePath ,String parentName);
+
     @Insert
     void insert(User user);
 

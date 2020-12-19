@@ -1,6 +1,7 @@
 package com.example.bluetoothtest.view.fragments;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,9 +15,13 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.FragmentNavigator;
 
 import com.example.bluetoothtest.model.database.entities.admins.Admin;
 import com.example.bluetoothtest.model.database.entities.admins.AdminProfileUpdate;
@@ -62,6 +67,9 @@ public class FragmentEditProfile extends Fragment {
     TextInputEditText usernameEditText;
     TextInputEditText passwordEditText;
     TextInputEditText rePasswordEditText;
+
+    boolean isNewProfileImageSelected = false;
+    boolean changedPassword = false;
 
 
     @Nullable
@@ -109,13 +117,12 @@ public class FragmentEditProfile extends Fragment {
         String username;
 
         boolean isAdmin = arguments.getIsAdmin();
+
         if (isAdmin) {
             admin = adminViewModel.getAdmin(personName);
             profileBitmapPath = admin.profilePath;
             username = admin.name;
-
         } else {
-
             user = userViewModel.getUser(personName, MainActivity.username);
             profileBitmapPath = user.profilePath;
             username = user.name;
@@ -124,14 +131,14 @@ public class FragmentEditProfile extends Fragment {
         }
 
 
-        String finalUserName = username;
+        String oldUserName = username;
 
-        usernameEditText.setText(finalUserName);
+        usernameEditText.setText(oldUserName);
 
         ProfileHelper.getImage(profileBitmapPath, profileImage);
 
         view.findViewById(R.id.edit_profile_button_cancel).
-                setOnClickListener(this::popBack);
+                setOnClickListener(this::navigateBack);
 
 
         profileImage.setOnClickListener(v -> startCameraIntent());
@@ -139,25 +146,63 @@ public class FragmentEditProfile extends Fragment {
         buttonDone = view.findViewById(R.id.edit_profile_button_done);
         buttonDone.
                 setOnClickListener(v -> {
+                    if (isNewProfileImageSelected)
+                        ProfileHelper.delete(profileBitmapPath); //Deleting cache file
 
-                    ProfileHelper.delete(profileBitmapPath); //Deleting cache file
 
-                    String finalStringUsername = usernameEditText.getText().toString().trim();
+                    String finalStringUsername = getStringFromEditText(usernameEditText);
+                    String password = getStringFromEditText(passwordEditText);
+                    String rePassword = getStringFromEditText(rePasswordEditText);
 
                     if (!DialogValidator.isLengthValid(finalStringUsername, 6, 26)) {
-                        DialogValidator.setError("Username should be between 6 and 26 characters", usernameTextInputLayout);
+                        DialogValidator.
+                                setError("Username should be between 6 and 26 characters", usernameTextInputLayout);
                         return;
                     }
+                    if (!(password.isEmpty() && rePassword.isEmpty())) {
+                        if (!password.isEmpty() && rePassword.isEmpty()) {
+                            DialogValidator.setError("Enter Confirm Password", rePasswordTextInputLayout);
+                            return;
+                        }
+                        if (password.isEmpty() && !rePassword.isEmpty()) {
+                            DialogValidator.setError("You Should Enter Password First", passwordTextInputLayout);
+                            return;
+                        }
+                        if (!DialogValidator.arePasswordsEqual(password, rePassword)) {
+                            DialogValidator.setError(new String[]{"Passwords Don't Match", "Passwords Don't Match"},
+                                    new TextInputLayout[]{passwordTextInputLayout, rePasswordTextInputLayout});
+                            return;
+                        }
+                        if (!DialogValidator.isLengthValid(password, 6, 24)) {
+                            DialogValidator.setError("The Password Doesn't Meet Requirements", passwordTextInputLayout);
+                            return;
+                        }
+                        if (!DialogValidator.isLengthValid(rePassword, 6, 24)) {
+                            DialogValidator.setError("The Confirm Password Doesn't Meet Requirements", rePasswordTextInputLayout);
+                            return;
+                        }
+                        changedPassword = true;
+                    }
 
-                    profileBitmapPath = uploaderHelper.uploadProfile
-                            (nameFile, isAdmin ? finalStringUsername : MainActivity.username, finalBitmap);
+                    if (finalBitmap != null)
+                        profileBitmapPath = uploaderHelper.uploadProfile
+                                (nameFile, isAdmin ? finalStringUsername : MainActivity.username, finalBitmap);
 
-                    if (isAdmin)
-                        adminViewModel.update(new AdminProfileUpdate(finalStringUsername, profileBitmapPath));
-                    else
-                        userViewModel.update(finalStringUsername, profileBitmapPath, MainActivity.username); // updating database
+                    if (isAdmin) {
+                        userViewModel.updateAllUsersParent(finalStringUsername, oldUserName);
+                        adminViewModel.update(finalStringUsername, oldUserName, profileBitmapPath);
+                        if (changedPassword)
+                            adminViewModel.updatePassword(finalStringUsername, password);
+                        // uploaderHelper.renameDirectory(finalStringUsername, oldUserName);
+                    } else
+                        userViewModel.
+                                updateUserName(finalStringUsername, oldUserName, profileBitmapPath, MainActivity.username); // updating database
 
-                    popBack(v);
+
+                    NavController navController = Navigation.findNavController(v);
+                    navController.popBackStack(R.id.fEditProfile, false);
+                    navController.navigate(FragmentEditProfileDirections.actionFEditProfileToFUserAdd());
+
                 });
 
         view.findViewById(R.id.edit_profile_pick_image).
@@ -166,7 +211,11 @@ public class FragmentEditProfile extends Fragment {
 
     }
 
-    private void popBack(View v) {
+    private String getStringFromEditText(TextInputEditText usernameEditText) {
+        return usernameEditText.getText().toString().trim();
+    }
+
+    private void navigateBack(View v) {
         Navigation.findNavController(v).navigateUp();
     }
 
@@ -208,6 +257,8 @@ public class FragmentEditProfile extends Fragment {
                 UUID randomToken = UUID.randomUUID();
 
                 nameFile = randomToken + ".png";
+
+                isNewProfileImageSelected = true;
 
                 profileBitmapPath = uploaderHelper.uploadAsCache(finalBitmap, nameFile);
                 ProfileHelper.getImage(profileBitmapPath, profileImage);

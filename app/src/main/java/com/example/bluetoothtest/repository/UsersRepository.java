@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.example.bluetoothtest.model.database.AppDatabase;
 import com.example.bluetoothtest.model.database.entities.admins.Admin;
 import com.example.bluetoothtest.model.database.entities.admins.AdminDAO;
+import com.example.bluetoothtest.model.database.entities.admins.AdminPasswordUpdatePartial;
 import com.example.bluetoothtest.model.database.entities.admins.AdminProfileUpdate;
 import com.example.bluetoothtest.model.database.entities.users.User;
 import com.example.bluetoothtest.model.database.entities.users.UserDAO;
@@ -47,10 +48,15 @@ public class UsersRepository {
         return adminDAO.getAdmin(name);
     }
 
-    public void updateAdmin(AdminProfileUpdate adminProfileUpdate) {
+    public void updateAdmin(String name, String oldName, String profilePath) {
         AppDatabase.databaseExecutorService.execute(() ->
-                adminDAO.update(adminProfileUpdate));
+                adminDAO.update(name, oldName, profilePath));
 
+    }
+
+    public void updateAdminPassword(String name, String password) {
+        AppDatabase.databaseExecutorService.execute(() ->
+                adminDAO.updatePassword(new AdminPasswordUpdatePartial(name, password)));
     }
 
     public boolean doesAdminExist(String name, String password) {
@@ -77,6 +83,14 @@ public class UsersRepository {
     public void updateUser(String username, String profilePath, String parent) {
         AppDatabase.databaseExecutorService.execute(() ->
                 userDAO.update(new UserProfileUpdatePartial(username, profilePath, parent)));
+    }
+
+    public void updateAllUsersParent(String parentName, String oldParentName) {
+        AppDatabase.databaseExecutorService.execute(() -> userDAO.updateAllUsersParent(parentName, oldParentName));
+    }
+
+    public void updateUserName(String username, String oldUsername, String profilePath, String parentName) {
+        AppDatabase.databaseExecutorService.execute(() -> userDAO.updateUsername(username, oldUsername, profilePath, parentName));
     }
 
     public User getUser(String name, String parentName) {

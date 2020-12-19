@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.FileUtils;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.room.util.FileUtil;
 
 import com.example.bluetoothtest.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -29,9 +31,13 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.util.List;
+import java.util.concurrent.Executors;
 
 public class ProfileHelper {
     private Bitmap bitmap;
@@ -68,7 +74,21 @@ public class ProfileHelper {
         }
     }
 
+    public static void getImage(String path, ImageView imageView) {
+
+        if (path != null) {
+            //Calling fit method will prevent some issues when there is lot of pictures loading
+            //also it prevents extra memory usage
+            Picasso.get().load(new File(path)).placeholder(R.drawable.ic_baseline_person_24).fit().noFade().into(imageView);
+            return;
+        }
+        //Loading default image if the path is null
+        imageView.setImageDrawable(ContextCompat.getDrawable(imageView.getContext(), R.drawable.ic_default_user));
+
+    }
+
     public String uploadProfile(String name, String directoryName, Bitmap bitmapParameter) {
+
 
         if (bitmapParameter != null) {
 
@@ -107,17 +127,62 @@ public class ProfileHelper {
 
     }
 
-    public static void getImage(String path, ImageView imageView) {
+    public void moveImages(String directoryName, String newDirectoryName) {
+        File mainStorage = context.getFilesDir();
+        File profileDirectory = new File(mainStorage, MAIN_PROFILE_NAME);
+        File parentCategory = new File(profileDirectory, directoryName);
 
-        if (path != null) {
-            //Calling fit method will prevent some issues when there is lot of pictures loading
-            //also it prevents extra memory usage
-            Picasso.get().load(new File(path)).fit().noFade().into(imageView);
-            return;
+        if (!parentCategory.exists())
+            parentCategory.mkdirs();
+
+        File[] files = parentCategory.listFiles();
+
+
+        File newCategory = new File(profileDirectory, newDirectoryName);
+
+        if (!newCategory.exists())
+            newCategory.mkdirs();
+
+        if (files != null && files.length > 0) {
+
+            FileChannel source = null;
+            FileChannel destination = null;
+            try {
+                for (File file : files) {
+                    source = new FileInputStream(file).getChannel();
+                    destination = new FileOutputStream(new File(newCategory, file.getName())).getChannel();
+                    destination.transferFrom(source, 0, source.size());
+                    file.delete();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (source != null) {
+                    try {
+                        source.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (destination != null) {
+                    try {
+                        destination.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            parentCategory.delete();
         }
-        //Loading default image if the path is null
-        imageView.setImageDrawable(ContextCompat.getDrawable(imageView.getContext(), R.drawable.ic_default_user));
 
+
+    }
+
+    public void renameDirectory(String name, String oldName) {
+        File mainStorage = context.getFilesDir();
+        File profileDirectory = new File(mainStorage, MAIN_PROFILE_NAME);
+        File parentCategory = new File(profileDirectory, oldName);
+        parentCategory.renameTo(new File(profileDirectory, name));
     }
 
     public String uploadAsCache(Bitmap bitmap, String name) {

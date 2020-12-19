@@ -195,7 +195,8 @@ public class FragmentCreateUser extends Fragment implements View.OnClickListener
             ProfileHelper.delete(profileBitmapPath);
 
             // Uploading Final Image
-            profileBitmapPath = uploaderHelper.uploadProfile(nameFile, usernameText, finalBitmap);
+            profileBitmapPath = uploaderHelper.
+                    uploadProfile(nameFile, isAdmin ? usernameText : MainActivity.username, finalBitmap);
 
             if (isAdmin)
                 adminViewModel.insert(new Admin(usernameText,

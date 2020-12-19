@@ -28,8 +28,11 @@ public interface AdminDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Admin admin);
 
+    @Query("UPDATE admins_table SET name=:username,profile_path=:profilePath WHERE name = :oldName")
+    void update(String username, String oldName, String profilePath);
+
     @Update(entity = Admin.class)
-    void update(AdminProfileUpdate adminProfileUpdate);
+    void updatePassword(AdminPasswordUpdatePartial partial);
 
     @Delete
     void delete(Admin admin);

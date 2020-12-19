@@ -56,13 +56,25 @@
         android:label="FragmentSettingPreferences" >
         <action
             android:id="@+id/action_fSettingPreferences_to_loginHost"
-            app:destination="@id/loginHost" />
+            app:destination="@id/loginHost"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_fSettingPreferences_to_fUserAdd"
-            app:destination="@id/fUserAdd" />
+            app:destination="@id/fUserAdd"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_fSettingPreferences_to_fEditProfile"
-            app:destination="@id/fEditProfile" />
+            app:destination="@id/fEditProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/fEditProfile"
@@ -74,6 +86,20 @@
         <argument
             android:name="isAdmin"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_fEditProfile_to_fUserInformation"
+            app:destination="@id/fUserInformation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_fEditProfile_to_fUserAdd"
+            app:destination="@id/fUserAdd"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <activity
         android:id="@+id/loginHost"

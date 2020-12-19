@@ -1,6 +1,8 @@
 package com.example.bluetoothtest.view_model;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -9,6 +11,8 @@ import androidx.lifecycle.LiveData;
 import com.example.bluetoothtest.model.database.entities.admins.Admin;
 import com.example.bluetoothtest.model.database.entities.admins.AdminProfileUpdate;
 import com.example.bluetoothtest.repository.UsersRepository;
+import com.example.bluetoothtest.view.activities.MainActivity;
+import com.example.bluetoothtest.view.activities.SplashScreen;
 
 import java.util.List;
 
@@ -16,13 +20,15 @@ public class AdminViewModel extends AndroidViewModel {
 
     private UsersRepository repository;
     private LiveData<List<Admin>> admins;
-
+    private final SharedPreferences sharedPreferences;
 
     public AdminViewModel(@NonNull Application application) {
         super(application);
 
         repository = new UsersRepository(application);
         admins = repository.getAdmins();
+        sharedPreferences =
+                application.getSharedPreferences(SplashScreen.SHARED_PREFERENCES_TAG, Context.MODE_PRIVATE);
 
 
     }
@@ -43,8 +49,16 @@ public class AdminViewModel extends AndroidViewModel {
         return repository.getAdmin(name);
     }
 
-    public void update(AdminProfileUpdate adminProfileUpdate) {
-        repository.updateAdmin(adminProfileUpdate);
+    public void update(String name, String oldName, String profilePath) {
+        MainActivity.username = name;
+        sharedPreferences.edit().
+                putString(MainActivity.userTag, name).
+                apply();
+        repository.updateAdmin(name, oldName, profilePath);
+    }
+
+    public void updatePassword(String name, String password) {
+        repository.updateAdminPassword(name, password);
     }
 
     public boolean doesAdminExist(String username, String password) {
